@@ -1,4 +1,4 @@
 include ':FlieManager'
 include ':GameMaster'
 include ':app'
-rootProject.name = "My Application"
+rootProject.name = "ProjectPractice"
