@@ -1,3 +1,5 @@
+include ':NanoHttpPractiice'
+include ':HttpWeather'
 include ':FlieManager'
 include ':GameMaster'
 include ':app'
