@@ -1,22 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/circular_background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-
+        android:layout_height="wrap_content"
+        android:text="测试"
+        android:textSize="18dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/viewHolder_province"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="1"
-        android:id="@+id/httpWeather_viewHolder1_textTest"
-        android:text="viewholder1"
-        android:background="#00ffff"
+        app:layout_constraintHorizontal_bias="0.05"
+        android:layout_margin="15dp"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:id="@+id/viewHolder_id"
         />
 
+    <TextView
+        android:textSize="18dp"
+        android:layout_margin="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/viewHolder_id"
+        app:layout_constraintRight_toRightOf="@+id/viewHolder_id"
+        app:layout_constraintTop_toBottomOf="@+id/viewHolder_id"
+        app:layout_constraintBottom_toTopOf="@+id/viewHolder_cityName"
+        android:id="@+id/viewHolder_province"
+        app:layout_constraintHorizontal_bias="0"
+        />
+
+    <TextView
+        android:textSize="18dp"
+        android:layout_margin="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/viewHolder_id"
+        app:layout_constraintRight_toRightOf="@+id/viewHolder_id"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/viewHolder_province"
+        app:layout_constraintBottom_toTopOf="@+id/viewHolder_lat"
+        android:id="@+id/viewHolder_cityName"
+        />
+
+    <TextView
+        android:textSize="18dp"
+        android:layout_margin="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/viewHolder_id"
+        app:layout_constraintRight_toRightOf="@+id/viewHolder_id"
+        app:layout_constraintTop_toBottomOf="@+id/viewHolder_cityName"
+        app:layout_constraintHorizontal_bias="0"
+        android:id="@+id/viewHolder_lat"
+        app:layout_constraintBottom_toTopOf="@+id/viewHolder_lon"
+
+        />
+
+    <TextView
+        android:textSize="18dp"
+        android:layout_margin="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/viewHolder_id"
+        app:layout_constraintTop_toBottomOf="@+id/viewHolder_lat"
+        app:layout_constraintRight_toRightOf="@+id/viewHolder_id"
+        app:layout_constraintBottom_toTopOf="@+id/viewholder_leader"
+        app:layout_constraintHorizontal_bias="0"
+        android:id="@+id/viewHolder_lon"
+        />
+
+    <TextView
+        android:textSize="18dp"
+        android:layout_margin="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/viewHolder_id"
+        app:layout_constraintTop_toBottomOf="@+id/viewHolder_lon"
+        app:layout_constraintRight_toRightOf="@+id/viewHolder_id"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:id="@+id/viewholder_leader"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

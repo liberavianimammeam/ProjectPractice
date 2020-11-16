@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.NanohttpPractiice"
+        applicationId "com.example.NanohttpPractice"
         minSdkVersion 27
         targetSdkVersion 30
         versionCode 1
