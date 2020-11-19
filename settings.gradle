@@ -1,3 +1,4 @@
+include ':Test_Just_For_Test'
 include ':NanoHttpPractice'
 include ':HttpWeather'
 include ':FlieManager'
