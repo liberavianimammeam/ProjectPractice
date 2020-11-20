@@ -16,6 +16,7 @@ import com.example.httpweather.bean.LocationBean
 import com.example.httpweather.util.GsonUtil
 import com.example.httpweather.view.adapter.LocationAdapter
 import com.example.httpweather.viewModel.FragmentLocationViewModel
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.locations.view.*
 
 class FragmentLocation: Fragment() {
@@ -33,13 +34,13 @@ class FragmentLocation: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var mAdapter = LocationAdapter()
+        var mAdapter = LocationAdapter(mViewModel, this)
         view.locations_RecyclerView.adapter = mAdapter
         view.locations_RecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         view.locations_RecyclerView.layoutManager = LinearLayoutManager(requireContext())
         mViewModel.resolveJsonData(requireContext())
-        mViewModel.jsonArray.observe(requireActivity(), Observer {
-            mAdapter.setLocationData(GsonUtil.getLocationBeanArrayList(it))
+        mViewModel.locationDetail.observe(requireActivity(), Observer {
+            mAdapter.mLocationData = it
             mAdapter.notifyDataSetChanged()
         })
 

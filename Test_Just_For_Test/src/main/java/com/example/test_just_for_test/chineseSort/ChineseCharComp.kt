@@ -6,7 +6,7 @@ import java.util.*
 import kotlin.Comparator
 
 @SuppressWarnings("unchecked")
-class ChineseCharComp<Object> : Comparator<com.example.test_just_for_test.bean.Students>{
+class ChineseCharComp : Comparator<com.example.test_just_for_test.bean.Students>{
 
     val mCollator: Collator by lazy {
         Collator.getInstance()

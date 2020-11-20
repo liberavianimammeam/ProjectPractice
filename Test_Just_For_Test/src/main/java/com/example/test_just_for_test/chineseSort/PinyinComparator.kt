@@ -14,12 +14,12 @@ class PinyinComparator: Comparator<Object> {
     }
 
     fun getPinYin(input: String): String{
-        var format = HanyuPinyinOutputFormat()
+        val format = HanyuPinyinOutputFormat()
         format.caseType = HanyuPinyinCaseType.LOWERCASE
         format.toneType = HanyuPinyinToneType.WITH_TONE_NUMBER
         format.vCharType = HanyuPinyinVCharType.WITH_V
 
-        var inputChar = input.toCharArray()
+        val inputChar = input.toCharArray()
         var output: String = ""
         try {
             for (i in 0 until inputChar.size) {

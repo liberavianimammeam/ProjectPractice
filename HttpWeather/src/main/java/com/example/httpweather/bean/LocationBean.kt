@@ -11,9 +11,3 @@ data class LocationBean(
     val lat: Float,
     val lon: Float
 )
-
-
-data class test(
-    val id: Int
-
-)

@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         var student8: Students = Students("戊", (Math.random()*10 + 1).toInt(), (Math.random()*10 + 1).toInt())
         var student9: Students = Students("戌", (Math.random()*10 + 1).toInt(), (Math.random()*10 + 1).toInt())
 
-        var cmp = ChineseCharComp<String>()
+        var cmp = ChineseCharComp()
 //        var list: ArrayList<String> = arrayListOf("江西","南昌","上饶","上海","北京","呼伦贝尔","塞罕坝","九江","饥荒","只狼","黑魂","暗月之潮","敌之尖刀")
         var list = arrayListOf<Students>(student, student1, student2, student3, student4, student5, student6, student7, student8, student9)
         Collections.sort(list, cmp)
