@@ -2,7 +2,6 @@ package com.example.testjsoup.manager
 
 import android.content.Context
 import android.util.Log
-import androidx.annotation.GuardedBy
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
@@ -11,7 +10,6 @@ import com.android.volley.toolbox.Volley
 import com.example.testjsoup.request.NormalRequestTest
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import java.text.FieldPosition
 
 class SpiderManager {
 
@@ -75,7 +73,7 @@ class SpiderManager {
                         )
                     )
                     _noteData.postValue(storyData)
-                    if ((position -1) % 10 == 0) shouldStop = true
+                    if (position != 0 && position % 10 == 0) shouldStop = true
                     getData(context, position + 1)
                     Log.i(TAG, "getData: the size of url is " + urlData.size + " \n  and the story size is " + storyData.size + "\n the new url is " +
                             urlData[urlData.size -1] + "\n    and the position now is " + position)
