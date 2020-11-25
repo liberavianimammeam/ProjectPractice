@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.test_just_for_test"
+        applicationId "com.example.testjustfortest"
         minSdkVersion 27
         targetSdkVersion 30
         versionCode 1
