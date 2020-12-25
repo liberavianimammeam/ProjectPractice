@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="preference2"
+        android:key="preference2_Categegory"
+        >
+
+        <SwitchPreference
+            android:key="preference2_switchPreference1"
+            android:title="switchpreference1"
+            />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

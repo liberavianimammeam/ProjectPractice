@@ -1,4 +1,4 @@
-package com.example.testjsoup.request;
+package com.example.testjsoup.http_request;
 
 import androidx.annotation.Nullable;
 
@@ -6,8 +6,11 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
+import com.example.testjsoup.bean.WeatherBean;
 
 import java.io.UnsupportedEncodingException;
+
+import kotlin.reflect.KVariance;
 
 public class NormalRequest extends StringRequest {
     public NormalRequest(int method, String url, Response.Listener<String> listener, @Nullable Response.ErrorListener errorListener) {

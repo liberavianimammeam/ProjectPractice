@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="notification_category"
+        android:title="Notifications">
+
+        <SwitchPreference
+            android:key="switch_test"
+            android:title="switch"/>
+
+        <Preference
+            android:key="feedback_preference"
+            android:title="send feedback"
+            android:summary="report technical issues or suggest new features"/>
+
+        <PreferenceCategory
+            android:key="notification_category1"
+            android:title="Notifications">
+
+            <SwitchPreference
+                android:key="switch_test1"
+                android:title="switch1"/>
+            <Preference
+                android:key="feedback_preference1"
+                android:title="send feedback1"
+                android:fragment="com.example.test_just_for_test.ui.SettingFragment2"
+                android:summary="report technical issues or suggest new features"/>
+
+        </PreferenceCategory>
+
+    </PreferenceCategory>
+</PreferenceScreen>

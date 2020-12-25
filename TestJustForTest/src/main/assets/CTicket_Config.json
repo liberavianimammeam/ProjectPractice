@@ -1,0 +1,49 @@
+{
+	"Config":{
+		"enable":1, // 是否开启配置，1为开启，0为关闭
+		"macList":["30:1F:9A:61:B7:01"], // 只对该list中MAC的机器生效，如果没有该字段则不过滤
+		"serverUrl":"https://pdev.cleartv.cn",
+		"speakOn":true,
+		"checkFingerprint":true,
+		"checkFace":true,
+		"checkIDFace":true,
+		"checkQrCode":true,
+		"checkICCard":true,
+		"checkIDCard":true,
+		"qrcodeDelay":200,
+		"idCardDelay":200,
+		"faceDelay":200,
+		"checkQueryTimeout":6000,
+		"idFaceVerifyTimeout":6000,
+		"checkSucccessDelay":1200,
+		"checkSameGuyDelay":3000,
+		"faceAreaThreshold":0.01,
+		"idFaceThreshold":0.1,
+		"cameraDegree":1, // 0 : 0° ; 1 : 90° ; 2 : 180° ; 3 : 270°
+		"systemVol":15,
+		"sceneType":"CHECKER_VERTICAL" //COUNTER(0, "计数器"),CHECKER_VERTICAL(10, "立式人脸检票机"),CHECKER_GATE(11, "闸机检票机"),REGISTRAR_FACE(20, "人脸登记机"),REGISTRAR_FINGERPRINT(21, "指纹登记机")
+	},
+	"Upgrade":{
+		"enable":1,
+		"macList":["30:1F:9A:61:B7:01"],
+		"type":"usb",
+		"path":"/CTicket_0.9.apk",
+		"appInfo":{
+			"versionCode":9,
+			"packageName":"cn.cleartv.cticket",
+			"localPath":"",
+			"downloadUrl":""
+		}
+	},
+	"Network":{
+		"enable":1,
+		"macList":["30:1F:9A:61:B7:01"],
+		"type":"DHCP",
+		"ip":"192.168.17.243",
+		"gateway":"192.168.17.1",
+		"dns1":"8.8.8.8",
+		"dns2":"8.8.4.4",
+		"netmask":"255.255.255.0"
+	},
+	"CMD":{}
+}

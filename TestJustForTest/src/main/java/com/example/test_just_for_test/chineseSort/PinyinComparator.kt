@@ -8,8 +8,8 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType
 
 
-class PinyinComparator: Comparator<Object> {
-    override fun compare(o1: Object?, o2: Object?): Int {
+class PinyinComparator: Comparator<Any> {
+    override fun compare(o1: Any?, o2: Any?): Int {
         return 0
     }
 
