@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.example.testjsoup.request.NormalRequestTest
 import org.jsoup.Jsoup
@@ -60,7 +61,7 @@ class SpiderManager {
             var stringRequest = NormalRequestTest(
                 Request.Method.GET,
                 URL_ROOT.plus(urlData[position]),
-                {
+                Response.Listener{
                     var doc: Document = Jsoup.parse(it)
                     urlData.add(
                         doc.getElementsByClass("bottem2")[0].getElementsByAttribute(
@@ -78,7 +79,7 @@ class SpiderManager {
                     Log.i(TAG, "getData: the size of url is " + urlData.size + " \n  and the story size is " + storyData.size + "\n the new url is " +
                             urlData[urlData.size -1] + "\n    and the position now is " + position)
                 },
-                {
+                Response.ErrorListener{
                     Log.i(TAG, "onCreate: case error when get from http")
                 }
             ).setTag(HTTP_TAG)
