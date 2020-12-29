@@ -1,11 +1,17 @@
 package com.example.test_just_for_test
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.TimeUtils
 import android.view.KeyEvent
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.annotation.Nullable
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.createDataStore
@@ -33,7 +39,7 @@ import java.util.function.Consumer
 import kotlin.collections.ArrayList
 import kotlin.coroutines.coroutineContext
 
-class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback, View.OnClickListener {
 
     private val TAG = "TestJustForTest_MainActivity"
 
@@ -47,13 +53,18 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
         val dataStore: DataStore<Preferences> = this.createDataStore(name = "test")
 
         Log.i(TAG, "onCreate: the absolute path is " + this.filesDir.absolutePath)
+        
+//        test_placeHolder.setContentId(R.id.test_button2
 
 //        supportFragmentManager.beginTransaction().replace(activity_main_fragment_1.id, SettingFragment()).commit()
 
 //        val exampleCounterFlow: Flow<Int> = dataStore.data.map {
 //            it[] ?: 0
 //        }
-
+        test_button1.setOnClickListener(this)
+        test_button2.setOnClickListener(this)
+        test_button3.setOnClickListener(this)
+        test_placeHolder.setOnClickListener(this)
 
 //        dataStore.edit {
 //            val currentCounterValue = it["test"] ?: 0
@@ -97,6 +108,61 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
         Log.i(TAG, "onPreferenceStartFragment: the caller is " + caller?.javaClass + "   and the pref is " + pref?.key)
         supportFragmentManager.beginTransaction().replace(R.id.activity_main_fragment_1,SettingFragment2(), "test").addToBackStack(null).commit()
         return true
+    }
+
+    override fun onStart() {
+        super.onStart()
+        test_group.visibility = View.GONE
+        var mTextView: TextView = TextView(this)
+        mTextView.minHeight = 100
+        mTextView.minWidth = 200
+        mTextView.text = "tesakldgjaldgja;dglkad'gakja;ldskgakldsjalkdjaldshkahdadhahat"
+        mTextView.setBackgroundColor(Color.parseColor("#00ffff"))
+        mTextView.id = R.id.testText1
+        Log.i(TAG, "onCreate: the text id is " + mTextView.id)
+        constraint_test.addView(mTextView)
+        var mSet = ConstraintSet()
+//        mSet.constrainHeight(mTextView.id, ConstraintLayout.LayoutParams.MATCH_PARENT)
+//        mSet.constrainWidth(mTextView.id, 50)
+        mSet.connect(mTextView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+        mSet.connect(mTextView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+        mSet.connect(mTextView.id, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT)
+        mSet.connect(mTextView.id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT)
+
+        mSet.applyTo(constraint_test)
+
+        for (i in 1..10){
+            var testReturnBool: Boolean = testCouReturn()
+        }
+
+
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.test_button1 -> {
+                Log.i(TAG, "onClick: the press button is button1")
+            }
+            R.id.test_button2 -> {
+                Log.i(TAG, "onClick: the press button is button2")
+            }
+            R.id.test_button3 -> {
+                Log.i(TAG, "onClick: the press button is button3")
+            }
+            R.id.test_placeHolder -> {
+                Log.i(TAG, "onClick: the press place is placeHolder")
+            }
+        }
+    }
+
+    fun testCouReturn(): Boolean{
+
+        GlobalScope.launch {
+            Log.i(TAG, "testCouReturn: from the delay before")
+            delay(200)
+            Log.i(TAG, "testCouReturn: from the delay after")
+        }
+        return false
     }
 
 }

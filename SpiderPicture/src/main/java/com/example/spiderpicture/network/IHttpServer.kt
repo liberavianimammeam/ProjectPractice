@@ -1,5 +1,6 @@
 package com.example.spiderpicture.network
 
+import android.graphics.Bitmap
 import android.util.Log
 import com.example.spiderpicture.Global
 import okhttp3.OkHttpClient
@@ -18,10 +19,13 @@ interface IHttpServer {
     suspend fun requestUrlRoot(): String
 
     @GET("/{level2}")
-    suspend fun requestUrlLevel2(@Path(value = "level2") level2: String)
+    suspend fun requestUrlLevel2(@Path(value = "level2") level2: String): String
 
     @GET
     suspend fun requestAbsoluteUrl(@Url pathLevel2: String): String
+
+    @GET
+    suspend fun requestBitmap(@Url url: String): Bitmap
 
 
     companion object{

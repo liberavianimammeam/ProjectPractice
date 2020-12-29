@@ -6,7 +6,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spiderpicture.R
 
-class PictureViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class RootViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     fun bindView(bitmap: Bitmap){
         itemView.findViewById<ImageView>(R.id.holder_imageloader_imageview).setImageBitmap(bitmap)
