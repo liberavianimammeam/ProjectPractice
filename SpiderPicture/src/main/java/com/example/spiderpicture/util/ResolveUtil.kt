@@ -32,12 +32,12 @@ object ResolveUtil{
     fun resolveLevel2AtPosition(position: Int, urlResponse: String): ArrayList<ImageDataBean>{
         when(position){
             0 -> return resolveMNXZ(urlResponse)
-            1 -> return resolveJDLY(urlResponse)
-            2 -> return resolveFLJ(urlResponse)
-            3 -> return resolveTAGS(urlResponse)
-//            1 -> return resolveMNXZ(urlResponse)
-//            2 -> return resolveMNXZ(urlResponse)
-//            3 -> return resolveMNXZ(urlResponse)
+//            1 -> return resolveJDLY(urlResponse)
+//            2 -> return resolveFLJ(urlResponse)
+//            3 -> return resolveTAGS(urlResponse)
+            1 -> return resolveMNXZ(urlResponse)
+            2 -> return resolveMNXZ(urlResponse)
+            3 -> return resolveMNXZ(urlResponse)
             else -> throw Exception("there is no resolve method for the position $position")
         }
     }

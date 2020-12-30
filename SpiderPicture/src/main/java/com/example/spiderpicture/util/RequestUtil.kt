@@ -89,9 +89,10 @@ class RequestUtil(){
                 throw Exception("RequestUtil is not init")
             }
             var list = listBean
-            for (i in 0 until listBean.size){
-                var imageCoverRequest = ImageRequest(listBean[i].coverImageUrl, Response.Listener{
-                    list[i].bitmapCover = it
+            for (i in list){
+                if (i.bitmapCover != null) continue
+                var imageCoverRequest = ImageRequest(i.coverImageUrl, Response.Listener{
+                    i.bitmapCover = it
                     Log.i(TAG, "requestCoverImageListData: bitmap width is " + it.width + "  and the height is " + it.height)
                     _listCoverBeanData.postValue(list)
                 }, 1000, 1000, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.ARGB_8888, Response.ErrorListener {

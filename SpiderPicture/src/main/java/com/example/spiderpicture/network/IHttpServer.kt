@@ -22,7 +22,7 @@ interface IHttpServer {
     suspend fun requestUrlLevel2(@Path(value = "level2") level2: String): String
 
     @GET
-    suspend fun requestAbsoluteUrl(@Url pathLevel2: String): String
+    suspend fun requestAbsoluteUrl(@Url url: String): String
 
     @GET
     suspend fun requestBitmap(@Url url: String): Bitmap
