@@ -3,18 +3,15 @@ package com.example.spiderpicture.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.FrameLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spiderpicture.R
 import com.example.spiderpicture.model.MainActivityViewModel
-import com.example.spiderpicture.view.adapter.RootAdapter
 import com.example.spiderpicture.view.fragment.FragmentPages
 
 class MainActivity : AppCompatActivity() {
 
     private val TAG: String = "SpiderPicture_MainActivity"
-    private var adapter = RootAdapter()
 
     private val viewmodel by lazy {
         ViewModelProvider.AndroidViewModelFactory(application).create(MainActivityViewModel::class.java)
@@ -24,6 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportFragmentManager.beginTransaction().add(R.id.sp_activity_main_framelayout, FragmentPages()).commit()
+
+//        GlobalScope.launch(Dispatchers.Main) {
+//            ResolveUtil.resolveTAGS(IHttpServer.server.requestUrlLevel2(Global.urlSecondLevel[3]))
+//        }
     }
 
 //    override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,5 +1,6 @@
 package com.example.spiderpicture.util
 
+import android.media.Image
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -35,9 +36,6 @@ object ResolveUtil{
             1 -> return resolveJDLY(urlResponse)
             2 -> return resolveFLJ(urlResponse)
             3 -> return resolveTAGS(urlResponse)
-//            1 -> return resolveMNXZ(urlResponse)
-//            2 -> return resolveMNXZ(urlResponse)
-//            3 -> return resolveMNXZ(urlResponse)
             else -> throw Exception("there is no resolve method for the position $position")
         }
     }
@@ -55,24 +53,21 @@ object ResolveUtil{
 //        }
 //        Log.i(TAG, "resolveMnxz: the datalist is " + dataList.toString())
 //        return dataList
-
+        
         var dataList: ArrayList<ImageDataBean> = ArrayList()
-
         var rootDoc: Document = Jsoup.parse(urlResponse)
         var items = rootDoc.getElementById("page")
-                .getElementById("content")
-                .getElementById("primary-home")
-                .getElementById("post-list")
-                .getElementsByTag("li")
+            .getElementById("content")
+            .getElementById("primary-home")
+            .getElementById("post-list")
+            .getElementsByClass("item-in b2-radius")
         for (item in items){
-            var tittleItem = item.getElementsByClass("post-info")
-            var pictureItem = item.getElementsByClass("post-module-thumb b2-radius")
+            val coverPictureUrl: String = item.getElementsByClass("post-module-thumb b2-radius")[0].getElementsByTag("img")[0].attr("data-src")
+            val title: String = item.getElementsByClass("post-info")[0].getElementsByTag("h2")[0].getElementsByTag("a")[0].text().trim()
+            val thirdLevelInnerUrl: String = item.getElementsByClass("post-info")[0].getElementsByTag("h2")[0].getElementsByTag("a")[0].attr("href")
 
-            var coverPictureUrl = pictureItem[0].getElementsByTag("img")[0].attr("data-src")
-            var innerPictureUrl = pictureItem[0].attr("href")
-            var tittle = tittleItem[0].getElementsByTag("h2")
+            dataList.add(ImageDataBean(thirdLevelInnerUrl = thirdLevelInnerUrl, title = title, coverImageUrl = coverPictureUrl))
         }
-
         return dataList
     }
 
@@ -80,12 +75,64 @@ object ResolveUtil{
 
 
     fun resolveJDLY(urlResponse: String): ArrayList<ImageDataBean>{
-        TODO("not done as well")
+        var dataList: ArrayList<ImageDataBean> = ArrayList()
+        var rootDoc: Document = Jsoup.parse(urlResponse)
+        var items = rootDoc
+            .getElementById("page")
+            .getElementById("content")
+            .getElementById("primary-home")
+            .getElementById("post-list")
+            .getElementsByClass("item-in b2-radius")
+        for (item in items){
+            var title: String = item.getElementsByClass("post-info")[0].getElementsByTag("h2")[0].getElementsByTag("a")[0].text().trim()
+            var thirdLevelInnerUrl: String = item.getElementsByClass("post-info")[0].getElementsByTag("h2")[0].getElementsByTag("a")[0].attr("href")
+            var coverPictureUrl: String = item.getElementsByClass("post-module-thumb b2-radius")[0].getElementsByTag("img")[0].attr("data-src")
+
+            dataList.add(ImageDataBean(thirdLevelInnerUrl = thirdLevelInnerUrl, coverImageUrl = coverPictureUrl, title = title))
+        }
+        return dataList
     }
     fun resolveFLJ(urlResponse: String): ArrayList<ImageDataBean>{
-        TODO("not done as well")
+        var dataList: ArrayList<ImageDataBean> = ArrayList()
+        var rootDoc: Document = Jsoup.parse(urlResponse)
+        var items = rootDoc
+            .getElementById("page")
+            .getElementById("content")
+            .getElementById("primary-home")
+            .getElementById("post-list")
+            .getElementsByClass("item-in b2-radius")
+        for (item in items){
+            var title: String = item.getElementsByClass("post-info")[0].getElementsByTag("h2")[0].getElementsByTag("a")[0].text().trim()
+            var thirdLevelInnerUrl: String = item.getElementsByClass("post-info")[0].getElementsByTag("h2")[0].getElementsByTag("a")[0].attr("href")
+            var coverPictureUrl: String = item.getElementsByClass("post-module-thumb b2-radius")[0].getElementsByTag("img")[0].attr("data-src")
+
+            dataList.add(ImageDataBean(title = title, thirdLevelInnerUrl = thirdLevelInnerUrl, coverImageUrl = coverPictureUrl))
+        }
+
+        return dataList
     }
     fun resolveTAGS(urlResponse: String): ArrayList<ImageDataBean>{
-        TODO("not done as well")
+        var dataList: ArrayList<ImageDataBean> = ArrayList()
+        val rootDoc: Document = Jsoup.parse(urlResponse)
+        val items = rootDoc
+            .getElementById("page")
+            .getElementById("content")
+            .getElementById("tags")
+            .getElementById("main")
+            .getElementsByTag("li")
+        for (item in items){
+            val title = item.getElementsByTag("p")[0].text()
+            val thirdLevelInnerUrl = item.getElementsByTag("a").attr("href")
+            val coverPictureUrl = item.getElementsByTag("img")[0].attr("src")
+
+            dataList.add(ImageDataBean(thirdLevelInnerUrl = thirdLevelInnerUrl, coverImageUrl = coverPictureUrl, title = title))
+        }
+        return dataList
+    }
+
+    fun resolveThirdLevelDetail(urlResponse: String): ArrayList<ImageDataBean>{
+        var dataList: ArrayList<ImageDataBean> = ArrayList()
+
+        return dataList
     }
 }

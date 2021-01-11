@@ -1,43 +1,22 @@
-package com.example.test_just_for_test
+package com.example.test_just_for_test.ui
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.util.TimeUtils
-import android.view.KeyEvent
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.Nullable
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.createDataStore
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.example.test_just_for_test.bean.Students
-import com.example.test_just_for_test.chineseSort.ChineseCharComp
-import com.example.test_just_for_test.chineseSort.PinyinComparator
-import com.example.test_just_for_test.ui.SettingFragment
-import com.example.test_just_for_test.ui.SettingFragment2
-import io.reactivex.Observable
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Function
-import io.reactivex.schedulers.Schedulers
+import com.example.test_just_for_test.R
+import com.example.test_just_for_test.ui.fragment.SettingFragment2
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.GlobalScope.coroutineContext
-import kotlinx.coroutines.android.HandlerDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import java.util.*
-import java.util.concurrent.TimeUnit
-import java.util.function.Consumer
-import kotlin.collections.ArrayList
-import kotlin.coroutines.coroutineContext
 
 class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback, View.OnClickListener {
 
@@ -106,7 +85,9 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
         pref: Preference?
     ): Boolean {
         Log.i(TAG, "onPreferenceStartFragment: the caller is " + caller?.javaClass + "   and the pref is " + pref?.key)
-        supportFragmentManager.beginTransaction().replace(R.id.activity_main_fragment_1,SettingFragment2(), "test").addToBackStack(null).commit()
+        supportFragmentManager.beginTransaction().replace(
+            R.id.activity_main_fragment_1,
+            SettingFragment2(), "test").addToBackStack(null).commit()
         return true
     }
 

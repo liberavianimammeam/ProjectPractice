@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class FragmentSinglePageViewModel: ViewModel() {
 
     suspend fun requestDataInPosition(position: Int): ArrayList<ImageDataBean>{
-        return ResolveUtil.resolveLevel2AtPosition(position, IHttpServer.server.requestUrlLevel2(Global.urlSecondLevel[0]))
+        return ResolveUtil.resolveLevel2AtPosition(position, IHttpServer.server.requestUrlLevel2(Global.urlSecondLevel[position]))
     }
 
 }

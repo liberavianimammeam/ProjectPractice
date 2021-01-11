@@ -23,7 +23,7 @@
             <Preference
                 android:key="feedback_preference1"
                 android:title="send feedback1"
-                android:fragment="com.example.test_just_for_test.ui.SettingFragment2"
+                android:fragment="com.example.test_just_for_test.ui.fragment.SettingFragment2"
                 android:summary="report technical issues or suggest new features"/>
 
         </PreferenceCategory>

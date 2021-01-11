@@ -1,4 +1,4 @@
-package com.example.test_just_for_test.ui
+package com.example.test_just_for_test.ui.fragment
 
 import android.os.Bundle
 import android.util.Log

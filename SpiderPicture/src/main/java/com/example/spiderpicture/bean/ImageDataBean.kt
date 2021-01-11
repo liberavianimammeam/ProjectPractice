@@ -3,15 +3,15 @@ package com.example.spiderpicture.bean
 import android.graphics.Bitmap
 import androidx.annotation.Nullable
 
-class ImageDataBean(var innerUrl: String, var coverImageUrl: String, @Nullable var bitmapCover: Bitmap?, var tittle: String){
+class ImageDataBean(var thirdLevelInnerUrl: String, var coverImageUrl: String, @Nullable var bitmapCover: Bitmap?, var title: String){
 
-    constructor(innerUrl: String, coverImageUrl: String, tittle: String): this(innerUrl, coverImageUrl, null, tittle)
+    constructor(thirdLevelInnerUrl: String, coverImageUrl: String, title: String): this(thirdLevelInnerUrl, coverImageUrl, null, title)
 
     override fun toString(): String {
 
-        return "the ImageLiDataBean is : \n httpUrl: ".plus(innerUrl)
+        return "the ImageLiDataBean is : \n httpUrl: ".plus(thirdLevelInnerUrl)
             .plus("\n coverImageUrl: ").plus(coverImageUrl)
             .plus("\n the bitmap is null ?").plus(bitmapCover == null)
-            .plus("\n the tittle is ").plus(tittle)
+            .plus("\n the tittle is ").plus(title)
     }
 }

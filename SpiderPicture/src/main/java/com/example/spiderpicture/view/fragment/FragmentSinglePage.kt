@@ -47,12 +47,13 @@ class FragmentSinglePage(val position: Int): Fragment() {
             var data = mViewModel.requestDataInPosition(position)
             mAdapter.data = data
             mAdapter.notifyDataSetChanged()
-            RequestUtil.requestCoverImageListData(data)
+            //TODO 这里是自己使用 volley 请求网络图片数据，不过使用 glid 加载图片不需要此步骤
+//            RequestUtil.requestCoverImageListData(data)
         }
 
-        RequestUtil.listBeanData.observe(this@FragmentSinglePage, Observer{
-            mAdapter.data = it
-            mAdapter.notifyDataSetChanged()
-        })
+//        RequestUtil.listBeanData.observe(this@FragmentSinglePage, Observer{
+//            mAdapter.data = it
+//            mAdapter.notifyDataSetChanged()
+//        })
     }
 }

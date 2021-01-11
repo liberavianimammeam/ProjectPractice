@@ -46,6 +46,7 @@ interface IHttpServer {
                 Log.i(TAG, "log: retrofit back = $message")
             }
         }).setLevel(HttpLoggingInterceptor.Level.HEADERS))
+        .connectTimeout(3000, TimeUnit.MILLISECONDS)
         .build()
 
         var server: IHttpServer = Retrofit.Builder()

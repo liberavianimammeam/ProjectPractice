@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/constraint_test"
     android:background="#F0F1F1"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <FrameLayout
         android:layout_width="match_parent"

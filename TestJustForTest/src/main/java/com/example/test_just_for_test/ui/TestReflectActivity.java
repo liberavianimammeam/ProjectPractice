@@ -1,4 +1,4 @@
-package com.example.test_just_for_test;
+package com.example.test_just_for_test.ui;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.test_just_for_test.R;
 import com.example.test_just_for_test.bean.TestReflectBean;
 
 import java.lang.reflect.Field;
