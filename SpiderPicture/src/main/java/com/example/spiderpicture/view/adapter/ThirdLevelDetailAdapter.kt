@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spiderpicture.R
-import com.example.spiderpicture.bean.ImageDataBean
+import com.example.spiderpicture.bean.ImageDetailBean
 import com.example.spiderpicture.view.holder.ThirdLevelDetailViewHolder
 
 class ThirdLevelDetailAdapter: RecyclerView.Adapter<ThirdLevelDetailViewHolder>() {
 
-    var data: ArrayList<ImageDataBean> = ArrayList()
+    var data: ArrayList<ImageDetailBean> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThirdLevelDetailViewHolder {
         return ThirdLevelDetailViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.viewholder_third_level_detail, parent, false))

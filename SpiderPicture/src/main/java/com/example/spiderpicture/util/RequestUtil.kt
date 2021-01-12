@@ -2,8 +2,6 @@ package com.example.spiderpicture.util
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.net.sip.SipSession
-import android.provider.Settings
 import android.util.Log
 import android.widget.ImageView
 import androidx.lifecycle.LiveData
@@ -13,11 +11,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.ImageRequest
 import com.android.volley.toolbox.Volley
-import com.example.spiderpicture.Global
-import com.example.spiderpicture.bean.ImageDataBean
+import com.example.spiderpicture.bean.ImageCoverBean
 import com.example.spiderpicture.request.NormalRequest
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
 
 class RequestUtil(){
 
@@ -27,8 +22,8 @@ class RequestUtil(){
         var text: LiveData<String> = _text
         private var _bitmap: MutableLiveData<Bitmap> = MutableLiveData();
         var bitmap: LiveData<Bitmap> = _bitmap
-        private var _listCoverBeanData: MutableLiveData<ArrayList<ImageDataBean>> = MutableLiveData()
-        var listBeanData: LiveData<ArrayList<ImageDataBean>> = _listCoverBeanData
+        private var _listCoverBeanCover: MutableLiveData<ArrayList<ImageCoverBean>> = MutableLiveData()
+        var listBeanCover: LiveData<ArrayList<ImageCoverBean>> = _listCoverBeanCover
 
         private var queue: RequestQueue? = null
 
@@ -84,7 +79,7 @@ class RequestUtil(){
             queue?.add(imageRequest)
         }
 
-        fun requestCoverImageListData(listBean: ArrayList<ImageDataBean>){
+        fun requestCoverImageListData(listBean: ArrayList<ImageCoverBean>){
             if (queue == null){
                 throw Exception("RequestUtil is not init")
             }
@@ -94,7 +89,7 @@ class RequestUtil(){
                 var imageCoverRequest = ImageRequest(i.coverImageUrl, Response.Listener{
                     i.bitmapCover = it
                     Log.i(TAG, "requestCoverImageListData: bitmap width is " + it.width + "  and the height is " + it.height)
-                    _listCoverBeanData.postValue(list)
+                    _listCoverBeanCover.postValue(list)
                 }, 1000, 1000, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.ARGB_8888, Response.ErrorListener {
                     Log.i(TAG, "requestImageListData: get error of coverBitmap at position $i")
                 })

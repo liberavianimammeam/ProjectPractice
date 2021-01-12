@@ -3,7 +3,7 @@ package com.example.spiderpicture.model
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.spiderpicture.Global
-import com.example.spiderpicture.bean.ImageDataBean
+import com.example.spiderpicture.bean.ImageCoverBean
 import com.example.spiderpicture.network.IHttpServer
 import com.example.spiderpicture.util.RequestUtil
 import com.example.spiderpicture.util.ResolveUtil
@@ -59,7 +59,7 @@ class MainActivityViewModel: ViewModel() {
 
     }
 
-    fun refreshCoverImageListData(list: ArrayList<ImageDataBean>){
+    fun refreshCoverImageListData(list: ArrayList<ImageCoverBean>){
         RequestUtil.requestCoverImageListData(list)
     }
 

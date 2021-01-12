@@ -3,7 +3,7 @@ package com.example.spiderpicture.bean
 import android.graphics.Bitmap
 import androidx.annotation.Nullable
 
-class ImageDataBean(var thirdLevelInnerUrl: String, var coverImageUrl: String, @Nullable var bitmapCover: Bitmap?, var title: String){
+class ImageCoverBean(var thirdLevelInnerUrl: String, var coverImageUrl: String, @Nullable var bitmapCover: Bitmap?, var title: String){
 
     constructor(thirdLevelInnerUrl: String, coverImageUrl: String, title: String): this(thirdLevelInnerUrl, coverImageUrl, null, title)
 

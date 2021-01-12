@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spiderpicture.R
-import com.example.spiderpicture.bean.ImageDataBean
-import com.example.spiderpicture.util.RequestUtil
+import com.example.spiderpicture.bean.ImageCoverBean
 import com.example.spiderpicture.view.holder.SinglePageViewHolder
-import java.util.zip.Inflater
 
 class SinglePageAdapter: RecyclerView.Adapter<SinglePageViewHolder>() {
 
-    var data: ArrayList<ImageDataBean>? = null
+    var data: ArrayList<ImageCoverBean>? = null
     private val TAG: String = "SpiderPicture_SinglePageAdapter"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SinglePageViewHolder {
