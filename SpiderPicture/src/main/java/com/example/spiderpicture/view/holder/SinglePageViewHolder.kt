@@ -15,7 +15,7 @@ class SinglePageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     private val TAG: String = "SpiderPicture_SinglePageViewHolder"
 
-    fun bindView(cover: ImageCoverBean, position: Int){
+    fun bindView(cover: ImageCoverBean, position: Int, pagePosition: Int){
         //TODO 如何使用 retrofit 请求网络图片
 //        if (data.bitmapCover == null){
 //            GlobalScope.launch(Dispatchers.Main) {
@@ -39,6 +39,7 @@ class SinglePageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             override fun onClick(v: View?) {
                 var intent = Intent(itemView.context, ThirdLevelDetailActivity::class.java)
                 intent.putExtra(Global.intentTagForThirdLevelDetail, cover.thirdLevelInnerUrl)
+                intent.putExtra(Global.Pages.TAG, Global.urlSecondLevel[pagePosition])
                 itemView.context.startActivity(intent)
             }
 

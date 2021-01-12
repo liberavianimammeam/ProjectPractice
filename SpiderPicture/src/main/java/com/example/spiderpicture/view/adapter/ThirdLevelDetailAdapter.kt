@@ -1,5 +1,6 @@
 package com.example.spiderpicture.view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,7 @@ import com.example.spiderpicture.view.holder.ThirdLevelDetailViewHolder
 
 class ThirdLevelDetailAdapter: RecyclerView.Adapter<ThirdLevelDetailViewHolder>() {
 
+    private val TAG: String = "SpiderPicture_ThirdLevelDetailAdapter"
     var data: ArrayList<ImageDetailBean> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThirdLevelDetailViewHolder {
@@ -17,7 +19,7 @@ class ThirdLevelDetailAdapter: RecyclerView.Adapter<ThirdLevelDetailViewHolder>(
 
     override fun onBindViewHolder(holder: ThirdLevelDetailViewHolder, position: Int) {
         if (position < data.size){
-            holder.bindView(data.get(position))
+            holder.bindView(data, position)
         }
     }
 

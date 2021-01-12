@@ -12,6 +12,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.ImageRequest
 import com.android.volley.toolbox.Volley
 import com.example.spiderpicture.bean.ImageCoverBean
+import com.example.spiderpicture.bean.ImageDetailBean
 import com.example.spiderpicture.request.NormalRequest
 
 class RequestUtil(){
@@ -24,6 +25,9 @@ class RequestUtil(){
         var bitmap: LiveData<Bitmap> = _bitmap
         private var _listCoverBeanCover: MutableLiveData<ArrayList<ImageCoverBean>> = MutableLiveData()
         var listBeanCover: LiveData<ArrayList<ImageCoverBean>> = _listCoverBeanCover
+
+        val imageDetailLiveData: MutableLiveData<ImageDetailBean> = MutableLiveData()
+        val imageDetailErrorLiveData: MutableLiveData<ImageDetailBean> = MutableLiveData()
 
         private var queue: RequestQueue? = null
 
@@ -77,6 +81,76 @@ class RequestUtil(){
                 Log.i(TAG, "getImageData: request bitmap error at $url")
             })
             queue?.add(imageRequest)
+        }
+
+        fun getImageDetailBean(url: String, position: Int){
+            if (queue == null){
+                throw Exception("RequestUtil is not init")
+            }
+            queue!!.cancelAll(url)
+            Log.i(TAG, "getImageDetailBean: start imgeRequest at position $position")
+            var imageRequest: ImageRequest = ImageRequest(
+                url,
+                Response.Listener {
+                    imageDetailLiveData.postValue(
+                        ImageDetailBean(
+                            imageUrl = url,
+                            bitmap = it,
+                            position = position
+                        ))
+                },
+                1000,
+                1000,
+                ImageView.ScaleType.CENTER,
+                Bitmap.Config.ARGB_8888,
+                Response.ErrorListener {
+                    Log.i(TAG, "getImageDetailBean: request bitmap error at $position and the url is $url")
+                    imageDetailErrorLiveData.postValue(
+                        ImageDetailBean(
+                            imageUrl = url,
+                            bitmap = null,
+                            position = position
+                        )
+                    )
+                })
+            imageRequest.tag = url
+            queue!!.add(imageRequest)
+        }
+
+        fun getImageDetailBeanList(dataList: ArrayList<ImageDetailBean>){
+            if (queue == null){
+                throw Exception("RequestUtil is not init")
+            }
+            Log.i(TAG, "requestCoverImageListData: start request")
+            if (dataList.size <= 0) return
+            for (data in dataList){
+                var imageRequest: ImageRequest = ImageRequest(
+                    data.imageUrl,
+                    Response.Listener {
+                        imageDetailLiveData.postValue(
+                            ImageDetailBean(
+                                imageUrl = data.imageUrl,
+                                bitmap = it,
+                                position = data.position
+                            ))
+                    },
+                    1000,
+                    1000,
+                    ImageView.ScaleType.CENTER,
+                    Bitmap.Config.ARGB_8888,
+                    Response.ErrorListener {
+                        Log.i(TAG, "requestCoverImageListData: request bitmap error at ${data.position} and the url is ${data.imageUrl}")
+                        imageDetailErrorLiveData.postValue(
+                            ImageDetailBean(
+                                imageUrl = data.imageUrl,
+                                bitmap = null,
+                                position = data.position
+                            )
+                        )
+                    })
+                imageRequest.tag = data.imageUrl
+                queue!!.add(imageRequest)
+            }
         }
 
         fun requestCoverImageListData(listBean: ArrayList<ImageCoverBean>){

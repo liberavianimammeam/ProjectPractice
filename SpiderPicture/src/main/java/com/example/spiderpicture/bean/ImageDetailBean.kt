@@ -1,5 +1,17 @@
 package com.example.spiderpicture.bean
 
-class ImageDetailBean(var imageUrl: String) {
+import android.graphics.Bitmap
 
+class ImageDetailBean(var imageUrl: String, var bitmap: Bitmap? = null, var position: Int) {
+    override fun toString(): String {
+        return "\n".plus(
+            """
+            ------
+            the imageurl is $imageUrl
+            the position is $position
+            the bitmap is null? ${bitmap == null}
+            ------
+        """.trimIndent()
+        )
+    }
 }

@@ -46,6 +46,7 @@ class FragmentSinglePage(val position: Int): Fragment() {
         GlobalScope.launch(Dispatchers.Main) {
             var data = mViewModel.requestDataInPosition(position)
             mAdapter.data = data
+            mAdapter.pagePosition = position
             mAdapter.notifyDataSetChanged()
             //TODO 这里是自己使用 volley 请求网络图片数据，不过使用 glid 加载图片不需要此步骤
 //            RequestUtil.requestCoverImageListData(data)

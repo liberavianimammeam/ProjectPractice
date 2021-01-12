@@ -127,7 +127,7 @@ object ResolveUtil{
         return coverList
     }
 
-    fun resolveThirdLevelDetail(urlResponse: String): ArrayList<ImageDetailBean>{
+    fun resolveMNXZThirdLevel(urlResponse: String): ArrayList<ImageDetailBean>{
         var coverList: ArrayList<ImageDetailBean> = ArrayList()
         try{
             val rootDoc: Document = Jsoup.parse(urlResponse)
@@ -138,7 +138,7 @@ object ResolveUtil{
                     .getElementsByTag("article")[0]
                     .getElementsByTag("p")
             for(item in items){
-                coverList.add(ImageDetailBean(imageUrl = item.getElementsByTag("img")[0].attr("src")))
+                coverList.add(ImageDetailBean(imageUrl = item.getElementsByTag("img")[0].attr("src"), position = coverList.size))
             }
         }catch (e: Exception){
             Log.i(TAG, "resolveThirdLevelDetail: ${e.message}")

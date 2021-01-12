@@ -10,6 +10,7 @@ import com.example.spiderpicture.view.holder.SinglePageViewHolder
 
 class SinglePageAdapter: RecyclerView.Adapter<SinglePageViewHolder>() {
 
+    var pagePosition: Int? = null
     var data: ArrayList<ImageCoverBean>? = null
     private val TAG: String = "SpiderPicture_SinglePageAdapter"
 
@@ -19,7 +20,7 @@ class SinglePageAdapter: RecyclerView.Adapter<SinglePageViewHolder>() {
 
     override fun onBindViewHolder(holder: SinglePageViewHolder, position: Int) {
         data?.get(position)?.let {
-            holder.bindView(it, position)
+            holder.bindView(it, position, pagePosition!!)
             Log.i(TAG, "onBindViewHolder: the postiion is $position  and the data url is ${it.coverImageUrl}")
         }
 

@@ -8,7 +8,7 @@ import com.example.spiderpicture.util.ResolveUtil
 class ThirdLevelDetailViewModel: ViewModel() {
 
     suspend fun requestData(url: String): ArrayList<ImageDetailBean>{
-        return ResolveUtil.resolveThirdLevelDetail(IHttpServer.server.requestAbsoluteUrl(url))
+        return ResolveUtil.resolveMNXZThirdLevel(IHttpServer.server.requestAbsoluteUrl(url))
     }
 
 }
