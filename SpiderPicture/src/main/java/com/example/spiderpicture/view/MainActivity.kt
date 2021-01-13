@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
 import com.example.spiderpicture.R
 import com.example.spiderpicture.model.MainActivityViewModel
+import com.example.spiderpicture.util.RequestUtil
 import com.example.spiderpicture.view.fragment.FragmentPages
 
 class MainActivity : AppCompatActivity() {

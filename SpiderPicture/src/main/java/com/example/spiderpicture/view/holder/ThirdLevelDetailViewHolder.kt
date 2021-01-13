@@ -31,5 +31,11 @@ class ThirdLevelDetailViewHolder(itemView: View): RecyclerView.ViewHolder(itemVi
         }
 
     }
+    fun bindViewBySingleData(data: ImageDetailBean){
+        itemView.findViewById<TextView>(R.id.sp_viewholder_third_level_detail_title).text = data.imageUrl
+        if (data.bitmap != null){
+            itemView.findViewById<ImageView>(R.id.sp_viewholder_third_level_detail_image).setImageBitmap(data.bitmap)
+        }
+    }
 
 }

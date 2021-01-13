@@ -14,6 +14,8 @@ import com.android.volley.toolbox.Volley
 import com.example.spiderpicture.bean.ImageCoverBean
 import com.example.spiderpicture.bean.ImageDetailBean
 import com.example.spiderpicture.request.NormalRequest
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 class RequestUtil(){
 
@@ -83,7 +85,7 @@ class RequestUtil(){
             queue?.add(imageRequest)
         }
 
-        fun getImageDetailBean(url: String, position: Int){
+        fun requestImageDetailBean(url: String, position: Int, successListener: Response.Listener<Bitmap>, errorListener: Response.ErrorListener){
             if (queue == null){
                 throw Exception("RequestUtil is not init")
             }
@@ -91,67 +93,43 @@ class RequestUtil(){
             Log.i(TAG, "getImageDetailBean: start imgeRequest at position $position")
             var imageRequest: ImageRequest = ImageRequest(
                 url,
-                Response.Listener {
-                    imageDetailLiveData.postValue(
-                        ImageDetailBean(
-                            imageUrl = url,
-                            bitmap = it,
-                            position = position
-                        ))
-                },
+                successListener,
                 1000,
                 1000,
                 ImageView.ScaleType.CENTER,
                 Bitmap.Config.ARGB_8888,
-                Response.ErrorListener {
-                    Log.i(TAG, "getImageDetailBean: request bitmap error at $position and the url is $url")
-                    imageDetailErrorLiveData.postValue(
-                        ImageDetailBean(
-                            imageUrl = url,
-                            bitmap = null,
-                            position = position
-                        )
-                    )
-                })
+                errorListener
+            )
             imageRequest.tag = url
             queue!!.add(imageRequest)
         }
 
-        fun getImageDetailBeanList(dataList: ArrayList<ImageDetailBean>){
-            if (queue == null){
-                throw Exception("RequestUtil is not init")
-            }
-            Log.i(TAG, "requestCoverImageListData: start request")
-            if (dataList.size <= 0) return
-            for (data in dataList){
-                var imageRequest: ImageRequest = ImageRequest(
-                    data.imageUrl,
-                    Response.Listener {
-                        imageDetailLiveData.postValue(
-                            ImageDetailBean(
-                                imageUrl = data.imageUrl,
-                                bitmap = it,
-                                position = data.position
-                            ))
-                    },
-                    1000,
-                    1000,
-                    ImageView.ScaleType.CENTER,
-                    Bitmap.Config.ARGB_8888,
-                    Response.ErrorListener {
-                        Log.i(TAG, "requestCoverImageListData: request bitmap error at ${data.position} and the url is ${data.imageUrl}")
-                        imageDetailErrorLiveData.postValue(
-                            ImageDetailBean(
-                                imageUrl = data.imageUrl,
-                                bitmap = null,
-                                position = data.position
-                            )
-                        )
-                    })
-                imageRequest.tag = data.imageUrl
-                queue!!.add(imageRequest)
-            }
-        }
+//        suspend fun getImageDetailBeanList(dataList: ArrayList<ImageDetailBean>, successListener: Response.Listener<Bitmap>, errorListener: Response.ErrorListener){
+//            if (queue == null){
+//                throw Exception("RequestUtil is not init")
+//            }
+//            Log.i(TAG, "getImageDetailBeanList: start request and the dataList size is ${dataList.size}")
+//            if (dataList.size <= 0) return
+//            for (data in dataList){
+//                if (data.bitmap != null){
+//                    Log.i(TAG, "getImageDetailBeanList: the bitmap is not null and the position is ${data.position}")
+//                    continue
+//                }
+//                Log.i(TAG, "getImageDetailBeanList: request bitmap position ${data.position} and the url is ${data.imageUrl}")
+//                queue!!.cancelAll(data.imageUrl)
+//                var imageRequest: ImageRequest = ImageRequest(
+//                    data.imageUrl,
+//                    successListener,
+//                    1000,
+//                    1000,
+//                    ImageView.ScaleType.CENTER,
+//                    Bitmap.Config.ARGB_8888,
+//                    errorListener)
+//                imageRequest.tag = data.imageUrl
+//                queue!!.add(imageRequest)
+//                delay(500)
+//            }
+//        }
 
         fun requestCoverImageListData(listBean: ArrayList<ImageCoverBean>){
             if (queue == null){

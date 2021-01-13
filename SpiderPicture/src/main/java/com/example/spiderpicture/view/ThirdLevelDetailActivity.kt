@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Response
 import com.example.spiderpicture.Global
 import com.example.spiderpicture.R
 import com.example.spiderpicture.bean.ImageDetailBean
@@ -21,7 +22,6 @@ class ThirdLevelDetailActivity: AppCompatActivity() {
 
     private val TAG: String = "SpiderPicture_ThirdLevelDetailActivity"
     private var adapter = ThirdLevelDetailAdapter()
-    private var imageDetailBeanData: ArrayList<ImageDetailBean> = ArrayList()
     private val viewModel by lazy {
         ViewModelProvider.AndroidViewModelFactory(application).create(ThirdLevelDetailViewModel::class.java)
     }
@@ -36,30 +36,12 @@ class ThirdLevelDetailActivity: AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.Main) {
             intent.extras?.getString(Global.intentTagForThirdLevelDetail)?.let {
-                imageDetailBeanData = viewModel.requestData(it)
-                adapter.data = imageDetailBeanData
-                Log.i(TAG, "onCreate: the data is $imageDetailBeanData")
-                adapter.notifyDataSetChanged()
-                RequestUtil.getImageDetailBeanList(dataList = imageDetailBeanData)
+                viewModel.startRefreshPictureData(it, adapter)
             }
         }
+    }
 
-        RequestUtil.imageDetailLiveData.observe(this, Observer {
-            if (it.position < imageDetailBeanData.size){
-                imageDetailBeanData[it.position] = it
-                adapter.notifyDataSetChanged()
-            }
-        })
-
-        RequestUtil.imageDetailErrorLiveData.observe(this, Observer {
-            Log.i(TAG, "onCreate: get detailErrorLiveData in position ${it.position}")
-            if (it.position >= imageDetailBeanData.size) return@Observer
-            if (imageDetailBeanData[it.position].bitmap != null) return@Observer
-            RequestUtil.getImageDetailBean(it.imageUrl, it.position)
-
-        })
-
-        Log.i(TAG, "onCreate: the intent is ${intent.extras?.get("test")}")
-
+    override fun onStart() {
+        super.onStart()
     }
 }
