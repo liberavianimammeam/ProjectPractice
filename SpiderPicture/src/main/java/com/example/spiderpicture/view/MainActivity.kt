@@ -1,8 +1,10 @@
 package com.example.spiderpicture.view
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -69,6 +71,16 @@ class MainActivity : AppCompatActivity() {
         super.onWindowFocusChanged(hasFocus)
 
         Log.i(TAG, "onCreate: the width of the recyclerview is ${findViewById<RecyclerView>(R.id.activity_main_recycler_Image).layoutManager?.width}")
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        Log.i(TAG, "onKeyDown: the keyevent is $keyCode and the event is $event")
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            //TODO 完成显示dialog
+            return true
+        }else{
+            return super.onKeyDown(keyCode, event)
+        }
     }
 
     override fun onStart() {

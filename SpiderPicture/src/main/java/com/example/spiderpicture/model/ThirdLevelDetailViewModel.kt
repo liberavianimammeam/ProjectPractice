@@ -20,7 +20,7 @@ class ThirdLevelDetailViewModel: ViewModel() {
 
     suspend fun startRefreshPictureData(baseUrl: String, adapter: ThirdLevelDetailAdapter){
 
-        adapter.data = ResolveUtil.resolveMNXZThirdLevel(IHttpServer.server.requestAbsoluteUrl(baseUrl))
+        adapter.data = ResolveUtil.resolveNormalThirdLevel(IHttpServer.server.requestAbsoluteUrl(baseUrl))
         adapter.notifyDataSetChanged()
 
         if (adapter.data.size == 0) {

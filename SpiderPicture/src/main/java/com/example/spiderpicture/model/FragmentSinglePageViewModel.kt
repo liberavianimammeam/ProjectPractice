@@ -8,8 +8,11 @@ import com.example.spiderpicture.util.ResolveUtil
 
 class FragmentSinglePageViewModel: ViewModel() {
 
-    suspend fun requestDataInPosition(position: Int): ArrayList<ImageCoverBean>{
-        return ResolveUtil.resolveLevel2AtPosition(position, IHttpServer.server.requestUrlLevel2(Global.urlSecondLevel[position]))
+    suspend fun requestDataInPosition(position: Int, page: Int): ArrayList<ImageCoverBean>{
+        when(page){
+            1 -> return ResolveUtil.resolveLevel2AtPosition(position, IHttpServer.server.requestUrlLevel2(Global.urlSecondLevel[position]))
+            else -> return ResolveUtil.resolveLevel2AtPosition(position, IHttpServer.server.requestUrlLevel2InPage(Global.urlSecondLevel[position], pageNum = page.toString()))
+        }
     }
 
 }

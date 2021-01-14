@@ -21,6 +21,9 @@ interface IHttpServer {
     @GET("/{level2}")
     suspend fun requestUrlLevel2(@Path(value = "level2") level2: String): String
 
+    @GET("/{level2}/page/{pageNum}")
+    suspend fun requestUrlLevel2InPage(@Path (value = "level2") level2: String, @Path(value = "pageNum") pageNum: String): String
+
     @GET
     suspend fun requestAbsoluteUrl(@Url url: String): String
 

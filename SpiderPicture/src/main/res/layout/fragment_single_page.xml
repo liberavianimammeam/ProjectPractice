@@ -7,10 +7,55 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:background="@color/lucency"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_margin="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/sp_fragment_single_page_button_pre"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:id="@+id/sp_fragment_single_page_rv"
         android:clipToPadding="false"
+        />
+    
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_fragment_single_page_foot_group"
+        app:constraint_referenced_ids="sp_fragment_single_page_button_next,sp_fragment_single_page_button_pre, sp_fragment_single_page_tips"
+        />
+    
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_fragment_single_page_button_pre"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_fragment_single_page_rv"
+        app:layout_constraintRight_toLeftOf="@+id/sp_fragment_single_page_tips"
+        android:text="上一页"
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_fragment_single_page_tips"
+        app:layout_constraintLeft_toRightOf="@+id/sp_fragment_single_page_button_pre"
+        app:layout_constraintRight_toLeftOf="@+id/sp_fragment_single_page_button_next"
+        android:text="0/0"
+        android:textSize="12sp"
+        android:textAlignment="center"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintTop_toTopOf="@+id/sp_fragment_single_page_button_pre"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_fragment_single_page_button_pre"
+        />
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_fragment_single_page_button_next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_fragment_single_page_rv"
+        app:layout_constraintLeft_toRightOf="@+id/sp_fragment_single_page_tips"
+        android:text="下一页"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

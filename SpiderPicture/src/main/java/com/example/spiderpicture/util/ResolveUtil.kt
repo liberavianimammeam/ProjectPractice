@@ -58,12 +58,16 @@ object ResolveUtil{
             .getElementById("primary-home")
             .getElementById("post-list")
             .getElementsByClass("item-in b2-radius")
+        var maxPage = rootDoc.getElementById("page")
+            .getElementById("content")
+            .getElementById("primary-home")
+            .getElementsByClass("b2-pagenav post-nav ")[0].attr("data-max")
         for (item in items){
             val coverPictureUrl: String = item.getElementsByClass("post-module-thumb b2-radius")[0].getElementsByTag("img")[0].attr("data-src")
             val title: String = item.getElementsByClass("post-info")[0].getElementsByTag("h2")[0].getElementsByTag("a")[0].text().trim()
             val thirdLevelInnerUrl: String = item.getElementsByClass("post-info")[0].getElementsByTag("h2")[0].getElementsByTag("a")[0].attr("href")
 
-            coverList.add(ImageCoverBean(thirdLevelInnerUrl = thirdLevelInnerUrl, title = title, coverImageUrl = coverPictureUrl))
+            coverList.add(ImageCoverBean(thirdLevelInnerUrl = thirdLevelInnerUrl, title = title,bitmapCover = null, coverImageUrl = coverPictureUrl, maxPage = maxPage.toInt()))
         }
         return coverList
     }
@@ -117,17 +121,27 @@ object ResolveUtil{
             .getElementById("tags")
             .getElementById("main")
             .getElementsByTag("li")
+        var pages = rootDoc.getElementById("page")
+            .getElementById("content")
+            .getElementById("tags")
+            .getElementsByClass("btn-group")[0]
+            .getElementsByTag("a")
+        var maxPage = pages[pages.size - 1].text().toInt()
         for (item in items){
             val title = item.getElementsByTag("p")[0].text()
             val thirdLevelInnerUrl = item.getElementsByTag("a").attr("href")
             val coverPictureUrl = item.getElementsByTag("img")[0].attr("src")
 
-            coverList.add(ImageCoverBean(thirdLevelInnerUrl = thirdLevelInnerUrl, coverImageUrl = coverPictureUrl, title = title))
+            coverList.add(ImageCoverBean(thirdLevelInnerUrl = thirdLevelInnerUrl,bitmapCover = null, coverImageUrl = coverPictureUrl, title = title, maxPage = maxPage))
         }
         return coverList
     }
 
-    fun resolveMNXZThirdLevel(urlResponse: String): ArrayList<ImageDetailBean>{
+    fun resolveTAGSThirdLevel():  ArrayList<ImageCoverBean>{
+        TODO("not complete finished")
+    }
+
+    fun resolveNormalThirdLevel(urlResponse: String): ArrayList<ImageDetailBean>{
         var coverList: ArrayList<ImageDetailBean> = ArrayList()
         try{
             val rootDoc: Document = Jsoup.parse(urlResponse)
