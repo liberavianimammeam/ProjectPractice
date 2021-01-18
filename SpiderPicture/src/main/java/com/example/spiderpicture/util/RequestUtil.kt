@@ -96,7 +96,7 @@ class RequestUtil(){
                 successListener,
                 1000,
                 1000,
-                ImageView.ScaleType.CENTER,
+                ImageView.ScaleType.FIT_CENTER,
                 Bitmap.Config.ARGB_8888,
                 errorListener
             )

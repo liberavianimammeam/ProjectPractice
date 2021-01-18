@@ -38,8 +38,9 @@ class SinglePageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         itemView.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
                 var intent = Intent(itemView.context, ThirdLevelDetailActivity::class.java)
-                intent.putExtra(Global.intentTagForThirdLevelDetail, cover.thirdLevelInnerUrl)
+                intent.putExtra(Global.intentTagUrl, cover.thirdLevelInnerUrl)
                 intent.putExtra(Global.Pages.TAG, Global.urlSecondLevel[pagePosition])
+                intent.putExtra(Global.intentTagTitle, cover.title)
                 itemView.context.startActivity(intent)
             }
 

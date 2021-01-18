@@ -13,6 +13,7 @@ object Global {
     val urlRoot: String = "https://www.gteman.com"
     var urlSecondLevel: ArrayList<String> = arrayListOf(Pages.mnxz, Pages.jdly, Pages.flj, Pages.tags)
 
-    val intentTagForThirdLevelDetail: String = "THIRD_LEVEL_INTENT"
+    val intentTagUrl: String = "THIRD_LEVEL_INTENT"
+    val intentTagTitle: String = "TITLE"
 
 }

@@ -35,8 +35,10 @@ class ThirdLevelDetailActivity: AppCompatActivity() {
         itemView.adapter = adapter
 
         GlobalScope.launch(Dispatchers.Main) {
-            intent.extras?.getString(Global.intentTagForThirdLevelDetail)?.let {
-                viewModel.startRefreshPictureData(it, adapter)
+            intent.extras?.getString(Global.intentTagUrl)?.let { url ->
+                intent.extras?.getString(Global.intentTagTitle)?.let { title ->
+                    viewModel.startRefreshPictureData(applicationContext, title, url, adapter)
+                }
             }
         }
     }
