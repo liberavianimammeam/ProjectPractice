@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        supportFragmentManager.beginTransaction().add(R.id.sp_activity_main_framelayout, FragmentPages()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.sp_activity_main_framelayout, FragmentPages()).commit()
 
         Log.i(TAG, """
             |cacheDir is ${applicationContext.cacheDir}
@@ -114,9 +114,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        GlobalScope.launch(Dispatchers.IO) {
-            test()
-        }
+//        GlobalScope.launch(Dispatchers.IO) {
+//            test()
+//        }
     }
 
 
