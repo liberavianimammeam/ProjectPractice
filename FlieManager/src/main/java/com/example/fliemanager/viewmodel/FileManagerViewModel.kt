@@ -1,4 +1,4 @@
-package com.example.fliemanager
+package com.example.fliemanager.viewmodel
 
 import androidx.lifecycle.ViewModel
 
