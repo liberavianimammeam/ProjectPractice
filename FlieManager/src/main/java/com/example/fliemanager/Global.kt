@@ -7,6 +7,10 @@ object Global {
         val jpg: String = "jpg"
     }
 
+    object intentTag{
+        val jpgPath: String = "JPG_PATH"
+    }
+
     var filePositionNow: String? = null
     val pages = arrayListOf<String>("文件", "测试")
 

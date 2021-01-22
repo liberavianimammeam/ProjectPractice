@@ -3,17 +3,21 @@ package com.example.fliemanager.ui
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.fliemanager.Global
 import com.example.fliemanager.R
+import com.example.fliemanager.manager.FileManager
 import com.example.fliemanager.ui.adapter.PagesAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity: AppCompatActivity() {
 
+    private val TAG: String = "ProjectPractice_MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,5 +40,19 @@ class MainActivity: AppCompatActivity() {
             }
         }).attach()
 
+    }
+
+    override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
+        return super.dispatchKeyEvent(event)
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+
+        Log.i(TAG, "onKeyDown: the keycode is ${event?.keyCode}")
+        if (event?.keyCode == KeyEvent.KEYCODE_BACK){
+            if (FileManager.backUp()) return true
+
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }

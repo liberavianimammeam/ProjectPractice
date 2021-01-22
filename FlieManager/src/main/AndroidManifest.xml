@@ -31,6 +31,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.PictureActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
     </application>
 
 </manifest>

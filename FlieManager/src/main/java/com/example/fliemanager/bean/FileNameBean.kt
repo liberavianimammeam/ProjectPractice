@@ -1,12 +1,13 @@
 package com.example.fliemanager.bean
 
-class FileNameBean(var name: String, var isDirectory: Boolean, var type: String) {
+class FileNameBean(var name: String, var isDirectory: Boolean, var type: String, var path: String) {
 
     override fun toString(): String {
         return """
             name: $name
             isDirectory: $isDirectory
             type: $type
+            path: $path
         """.trimIndent()
     }
 }
