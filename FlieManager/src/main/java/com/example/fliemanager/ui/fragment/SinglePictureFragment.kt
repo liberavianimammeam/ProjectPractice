@@ -34,6 +34,10 @@ class SinglePictureFragment(var data: FileNameBean, var metrics: DisplayMetrics)
         return inflater.inflate(R.layout.fragment_single_picture, container, false)
     }
 
+    init {
+        Log.i(TAG, "init: the FileNameBean is $data")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -67,6 +71,11 @@ class SinglePictureFragment(var data: FileNameBean, var metrics: DisplayMetrics)
                 option.inSampleSize = if (heightRatio > widthRatio) widthRatio else heightRatio
                 mBitmap = BitmapFactory.decodeFile(data.path, option)
                 bitmapLiveData.postValue(true)
+                Log.i(TAG, "onStart: mBitmap is null ? ${mBitmap == null}")
+            }else{
+                mBitmap = BitmapFactory.decodeFile(data.path)
+                bitmapLiveData.postValue(true)
+                Log.i(TAG, "onStart: mBitmap is null ? ${mBitmap == null}")
             }
         }
 

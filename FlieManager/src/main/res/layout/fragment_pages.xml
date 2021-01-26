@@ -7,6 +7,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fp_recyclerview"
+        android:background="#EDEDED"
+        android:clipToPadding="false"
+        android:padding="2dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

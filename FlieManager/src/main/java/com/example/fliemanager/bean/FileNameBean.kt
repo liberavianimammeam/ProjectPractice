@@ -10,4 +10,7 @@ class FileNameBean(var name: String, var isDirectory: Boolean, var type: String,
             path: $path
         """.trimIndent()
     }
+
+    class FileNamePositionBean(var nameBean: FileNameBean, var position: Int)
+
 }

@@ -39,6 +39,7 @@ object FileManager {
         var namePaths = fileName.split(".")
         when(namePaths[namePaths.size - 1]){
             "jpg", "JPG" -> return Global.fileType.jpg
+            "png", "PNG" -> return Global.fileType.png
         }
         return Global.fileType.unknown
     }
@@ -60,8 +61,16 @@ object FileManager {
         return false
     }
 
-    fun getPictureFromPath(path: String){
-
+    fun getPictureDataNow(): ArrayList<FileNameBean>{
+        var pictureData: ArrayList<FileNameBean> = ArrayList()
+        pathDataNow.value?.let {
+            for (pathData in it){
+                if (pathData.type.equals(Global.fileType.jpg) || pathData.type.equals(Global.fileType.png)){
+                    pictureData.add(pathData)
+                }
+            }
+        }
+        return pictureData
     }
 
     

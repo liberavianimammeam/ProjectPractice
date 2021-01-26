@@ -36,15 +36,14 @@ class SinglePageFragment(var position: Int): Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         when(position){
-            0 -> doBusiness()
-            1 ->{}
+            0 -> filePathBusiness()
             else -> {}
         }
 
 
     }
 
-    fun doBusiness(){
+    fun filePathBusiness(){
         var adapter = SinglePageAdapter()
         view?.findViewById<RecyclerView>(R.id.fp_recyclerview)?.adapter = adapter
         view?.findViewById<RecyclerView>(R.id.fp_recyclerview)?.layoutManager = LinearLayoutManager(context)
@@ -53,13 +52,14 @@ class SinglePageFragment(var position: Int): Fragment() {
             adapter.data = it
         })
         adapter.choosePath.observe(this, Observer {
-            if (it.isDirectory){
-                viewmodel.refreshPathData(it.name)
+            if (it.nameBean.isDirectory){
+                viewmodel.refreshPathData(it.nameBean.name)
             }
-            when(it.type){
-                Global.fileType.jpg ->{
+            when(it.nameBean.type){
+                Global.fileType.jpg, Global.fileType.png ->{
                     var intent = Intent(context, PictureActivity::class.java)
-                    intent.putExtra(Global.intentTag.jpgPath, it.path)
+                    intent.putExtra(Global.intentTag.jpgPath, it.nameBean.path)
+                    intent.putExtra(Global.intentTag.clickPosition, it.position)
                     startActivity(intent)
                 }
             }

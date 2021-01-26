@@ -1,16 +1,15 @@
 package com.example.fliemanager.ui
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fliemanager.Global
 import com.example.fliemanager.R
 import com.example.fliemanager.manager.FileManager
 import com.example.fliemanager.ui.adapter.PicturePagesAdapter
 import kotlinx.android.synthetic.main.activity_picture.*
-import java.io.File
 
 class PictureActivity: AppCompatActivity() {
 
@@ -26,10 +25,23 @@ class PictureActivity: AppCompatActivity() {
 //        }
         var metrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(metrics)
-        Log.i(TAG, "onCreate: the width is ${metrics.widthPixels} and the height is ${metrics.heightPixels}")
-        ap_picture_views.adapter = PicturePagesAdapter(FileManager.pathDataNow.value!!, this, metrics)
+        Log.i(
+            TAG,
+            "onCreate: the width is ${metrics.widthPixels} and the height is ${metrics.heightPixels}"
+        )
 
 
+        var mAdapter = PicturePagesAdapter(
+            FileManager.getPictureDataNow(),
+            this,
+            metrics
+        )
+        ap_picture_views.adapter = mAdapter
+
+        Log.i(TAG, "onCreate: the pictureDataNow is ${FileManager.getPictureDataNow()}")
         
+        //TODO 该Activity下添加沉浸模式
+
+        ap_picture_views.setCurrentItem(intent.getIntExtra(Global.intentTag.clickPosition, 0), false)
     }
 }

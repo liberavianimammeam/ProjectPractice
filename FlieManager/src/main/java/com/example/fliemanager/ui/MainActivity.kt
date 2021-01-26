@@ -21,16 +21,12 @@ class MainActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
         if(PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
             ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 1)
         }
-        setContentView(R.layout.activity_main)
-    }
-
-    override fun onStart() {
-        super.onStart()
 
         findViewById<ViewPager2>(R.id.ac_viewpager).adapter = PagesAdapter(this)
 
@@ -39,7 +35,6 @@ class MainActivity: AppCompatActivity() {
                 tab.text = Global.pages[position]
             }
         }).attach()
-
     }
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {

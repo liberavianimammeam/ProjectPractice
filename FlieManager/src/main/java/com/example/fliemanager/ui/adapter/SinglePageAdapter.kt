@@ -10,7 +10,7 @@ import com.example.fliemanager.ui.viewholder.SinglePageViewHolder
 
 class SinglePageAdapter: RecyclerView.Adapter<SinglePageViewHolder>() {
 
-    var choosePath: MutableLiveData<FileNameBean> = MutableLiveData()
+    var choosePath: MutableLiveData<FileNameBean.FileNamePositionBean> = MutableLiveData()
 
     var data: ArrayList<FileNameBean> = ArrayList()
         set(value){
@@ -24,7 +24,7 @@ class SinglePageAdapter: RecyclerView.Adapter<SinglePageViewHolder>() {
 
     override fun onBindViewHolder(holder: SinglePageViewHolder, position: Int) {
         if (position < data.size){
-            holder.bindView(data[position], choosePath)
+            holder.bindView(data[position], choosePath, position)
         }
     }
 
