@@ -1,4 +1,4 @@
-include ':schedulemaster'
+include ':ScheduleMaster'
 include ':TestFindEquipInSameNet'
 include ':SpiderPicture'
 include ':TestJSoup'

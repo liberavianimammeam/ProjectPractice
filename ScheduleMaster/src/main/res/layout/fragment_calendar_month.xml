@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/fcm_monday"
+        app:layout_constraintLeft_toRightOf="@+id/fcm_sunday"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintRight_toLeftOf="@+id/fcm_tuesday"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="一"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/fcm_tuesday"
+        app:layout_constraintTop_toTopOf="@+id/fcm_monday"
+        app:layout_constraintBottom_toBottomOf="@+id/fcm_monday"
+        app:layout_constraintRight_toLeftOf="@+id/fcm_wednesday"
+        app:layout_constraintLeft_toRightOf="@+id/fcm_monday"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="二"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/fcm_wednesday"
+        app:layout_constraintTop_toTopOf="@+id/fcm_monday"
+        app:layout_constraintBottom_toBottomOf="@+id/fcm_monday"
+        app:layout_constraintLeft_toRightOf="@+id/fcm_tuesday"
+        app:layout_constraintRight_toLeftOf="@+id/fcm_thursday"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="三"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/fcm_thursday"
+        app:layout_constraintTop_toTopOf="@+id/fcm_monday"
+        app:layout_constraintBottom_toBottomOf="@+id/fcm_monday"
+        app:layout_constraintRight_toLeftOf="@+id/fcm_friday"
+        app:layout_constraintLeft_toRightOf="@+id/fcm_wednesday"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="四"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/fcm_friday"
+        app:layout_constraintTop_toTopOf="@+id/fcm_monday"
+        app:layout_constraintBottom_toBottomOf="@+id/fcm_monday"
+        app:layout_constraintLeft_toRightOf="@+id/fcm_thursday"
+        app:layout_constraintRight_toLeftOf="@+id/fcm_saturday"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="五"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/fcm_saturday"
+        app:layout_constraintTop_toTopOf="@+id/fcm_monday"
+        app:layout_constraintBottom_toBottomOf="@+id/fcm_monday"
+        app:layout_constraintLeft_toRightOf="@+id/fcm_friday"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="六"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/fcm_sunday"
+        android:text="日"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/fcm_monday"
+        app:layout_constraintTop_toTopOf="@+id/fcm_monday"
+        app:layout_constraintBottom_toBottomOf="@+id/fcm_monday"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fcm_monday"
+        app:layout_constraintVertical_bias="0"
+        android:id="@+id/fcm_date_recyclerview"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/fcm_change_surface"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fcm_plan_recyclerview"
+        app:layout_constraintTop_toBottomOf="@+id/fcm_date_recyclerview"
+
+        android:background="@drawable/ic_baseline_keyboard_arrow_up_24"
+
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fcm_change_surface"
+        android:id="@+id/fcm_plan_recyclerview"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
