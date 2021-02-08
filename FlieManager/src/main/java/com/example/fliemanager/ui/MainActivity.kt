@@ -45,6 +45,7 @@ class MainActivity: AppCompatActivity() {
 
         Log.i(TAG, "onKeyDown: the keycode is ${event?.keyCode}")
         if (event?.keyCode == KeyEvent.KEYCODE_BACK){
+            Global.positionReturn = -1
             if (FileManager.backUp()) return true
 
         }

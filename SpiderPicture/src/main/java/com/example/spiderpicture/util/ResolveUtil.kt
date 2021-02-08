@@ -152,7 +152,13 @@ object ResolveUtil{
                     .getElementsByTag("article")[0]
                     .getElementsByTag("p")
             for(item in items){
-                coverList.add(ImageDetailBean(imageUrl = item.getElementsByTag("img")[0].attr("src"), position = coverList.size))
+                Log.i(TAG, "resolveMNXZThirdLevel: the item is $item")
+                try {
+                    coverList.add(ImageDetailBean(imageUrl = item.getElementsByTag("img")[0].attr("src"), position = coverList.size))
+                }catch (e: java.lang.Exception){
+                    Log.i(TAG, "resolveMNXZThirdLevel: ${e.message}")
+                    continue
+                }
             }
         }catch (e: Exception){
             Log.i(TAG, "resolveThirdLevelDetail: ${e.message}")

@@ -17,7 +17,7 @@ object Global {
 
     var filePositionNow: String? = null
     val pages = arrayListOf<String>("文件")
-
+    var positionReturn: Int = -1
     val defaultPath: String = Environment.getExternalStorageDirectory().absolutePath.plus("/aa我的文件夹")
 
 }

@@ -76,7 +76,7 @@ class SinglePageFragment(var position: Int): Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         data?.getIntExtra("test_for_test", -1)?.let {
-            adapter.positionReturn = it
+            Global.positionReturn = it
             adapter.notifyDataSetChanged()
             view?.findViewById<RecyclerView>(R.id.fp_recyclerview)?.scrollToPosition(it)
         }

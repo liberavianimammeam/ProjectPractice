@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
         mTextView.minWidth = 200
         mTextView.text = "tesakldgjaldgja;dglkad'gakja;ldskgakldsjalkdjaldshkahdadhahat"
         mTextView.setBackgroundColor(Color.parseColor("#00ffff"))
-        mTextView.id = R.id.testText1
+//        mTextView.id = R.id.testText1
         Log.i(TAG, "onCreate: the text id is " + mTextView.id)
         constraint_test.addView(mTextView)
         var mSet = ConstraintSet()

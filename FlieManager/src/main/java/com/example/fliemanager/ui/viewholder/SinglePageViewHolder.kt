@@ -27,7 +27,7 @@ class SinglePageViewHolder(var itemView: View): RecyclerView.ViewHolder(itemView
 
     }
 
-    fun changeBackgroun(haveBeenChosen: Boolean){
+    fun changeBackground(haveBeenChosen: Boolean){
         if (haveBeenChosen){
             itemView.findViewById<ConstraintLayout>(R.id.hfd_background).setBackgroundColor(Color.parseColor("#8500ffff"))
         }else{
