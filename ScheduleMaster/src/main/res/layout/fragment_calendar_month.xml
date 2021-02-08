@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fcm_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -104,6 +105,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fcm_monday"
         app:layout_constraintVertical_bias="0"
+        android:background="@drawable/ic_record_background"
         android:id="@+id/fcm_date_recyclerview"
         />
 
@@ -129,6 +131,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fcm_change_surface"
         android:id="@+id/fcm_plan_recyclerview"
+        android:padding="5dp"
+        android:clipToPadding="false"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

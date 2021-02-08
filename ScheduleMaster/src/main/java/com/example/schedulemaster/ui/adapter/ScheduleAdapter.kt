@@ -29,7 +29,7 @@ class ScheduleAdapter(activity: FragmentActivity): FragmentStateAdapter(activity
                 }
                 return calendarWeekFragment!!
             }
-            else -> return Fragment()   //TODO 写一个错误的fragment？
+            else -> return Fragment()   //TODO 随便写一个错误的fragment？
         }
     }
 
