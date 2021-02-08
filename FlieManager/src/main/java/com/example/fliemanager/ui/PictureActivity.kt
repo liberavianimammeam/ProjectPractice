@@ -1,8 +1,10 @@
 package com.example.fliemanager.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.KeyEvent
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fliemanager.Global
@@ -23,6 +25,7 @@ class PictureActivity: AppCompatActivity() {
 //        intent.getStringExtra(Global.intentTag.jpgPath)?.let {
 //            ap_imageview.setImageBitmap(BitmapFactory.decodeFile(it))
 //        }
+
         var metrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(metrics)
         Log.i(
@@ -43,5 +46,16 @@ class PictureActivity: AppCompatActivity() {
         //TODO 该Activity下添加沉浸模式
 
         ap_picture_views.setCurrentItem(intent.getIntExtra(Global.intentTag.clickPosition, 0), false)
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (event?.keyCode == KeyEvent.KEYCODE_BACK){
+            var intent: Intent = Intent()
+            intent.putExtra("test_for_test", ap_picture_views.currentItem)
+            setResult(5,intent)
+            finish()
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }

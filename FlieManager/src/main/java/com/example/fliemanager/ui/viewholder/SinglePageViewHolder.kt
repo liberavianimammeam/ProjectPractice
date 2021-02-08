@@ -1,9 +1,11 @@
 package com.example.fliemanager.ui.viewholder
 
 import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fliemanager.R
@@ -23,6 +25,14 @@ class SinglePageViewHolder(var itemView: View): RecyclerView.ViewHolder(itemView
             }
         })
 
+    }
+
+    fun changeBackgroun(haveBeenChosen: Boolean){
+        if (haveBeenChosen){
+            itemView.findViewById<ConstraintLayout>(R.id.hfd_background).setBackgroundColor(Color.parseColor("#8500ffff"))
+        }else{
+            itemView.findViewById<ConstraintLayout>(R.id.hfd_background).setBackgroundColor(Color.parseColor("#0000ffff"))
+        }
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.fliemanager.ui.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,9 @@ import com.example.fliemanager.ui.adapter.SinglePageAdapter
 import com.example.fliemanager.viewmodel.SinglePageViewModel
 
 class SinglePageFragment(var position: Int): Fragment() {
+
+    private val TAG: String = "FileManager_SinglePageFragment"
+    var adapter = SinglePageAdapter()
 
     private val viewmodel by lazy {
         ViewModelProvider.NewInstanceFactory().create(SinglePageViewModel::class.java)
@@ -44,7 +48,6 @@ class SinglePageFragment(var position: Int): Fragment() {
     }
 
     fun filePathBusiness(){
-        var adapter = SinglePageAdapter()
         view?.findViewById<RecyclerView>(R.id.fp_recyclerview)?.adapter = adapter
         view?.findViewById<RecyclerView>(R.id.fp_recyclerview)?.layoutManager = LinearLayoutManager(context)
 
@@ -60,7 +63,8 @@ class SinglePageFragment(var position: Int): Fragment() {
                     var intent = Intent(context, PictureActivity::class.java)
                     intent.putExtra(Global.intentTag.jpgPath, it.nameBean.path)
                     intent.putExtra(Global.intentTag.clickPosition, it.position)
-                    startActivity(intent)
+//                    startActivity(intent)
+                    startActivityForResult(intent, 10)
                 }
             }
 
@@ -69,4 +73,12 @@ class SinglePageFragment(var position: Int): Fragment() {
         viewmodel.startGetData()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        data?.getIntExtra("test_for_test", -1)?.let {
+            adapter.positionReturn = it
+            adapter.notifyDataSetChanged()
+            view?.findViewById<RecyclerView>(R.id.fp_recyclerview)?.scrollToPosition(it)
+        }
+    }
 }

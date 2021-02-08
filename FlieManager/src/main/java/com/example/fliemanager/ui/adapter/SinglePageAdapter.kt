@@ -11,6 +11,7 @@ import com.example.fliemanager.ui.viewholder.SinglePageViewHolder
 class SinglePageAdapter: RecyclerView.Adapter<SinglePageViewHolder>() {
 
     var choosePath: MutableLiveData<FileNameBean.FileNamePositionBean> = MutableLiveData()
+    var positionReturn: Int = -1
 
     var data: ArrayList<FileNameBean> = ArrayList()
         set(value){
@@ -26,6 +27,9 @@ class SinglePageAdapter: RecyclerView.Adapter<SinglePageViewHolder>() {
         if (position < data.size){
             holder.bindView(data[position], choosePath, position)
         }
+
+        holder.changeBackgroun(position == positionReturn)
+
     }
 
     override fun getItemCount(): Int {
