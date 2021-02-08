@@ -31,7 +31,7 @@ class SinglePageViewHolder(var itemView: View): RecyclerView.ViewHolder(itemView
         if (haveBeenChosen){
             itemView.findViewById<ConstraintLayout>(R.id.hfd_background).setBackgroundColor(Color.parseColor("#8500ffff"))
         }else{
-            itemView.findViewById<ConstraintLayout>(R.id.hfd_background).setBackgroundColor(Color.parseColor("#0000ffff"))
+            itemView.findViewById<ConstraintLayout>(R.id.hfd_background).setBackgroundColor(Color.parseColor("#FFFFFF"))
         }
     }
 
