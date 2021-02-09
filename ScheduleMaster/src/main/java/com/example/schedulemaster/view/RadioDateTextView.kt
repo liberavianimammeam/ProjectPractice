@@ -14,7 +14,7 @@ import androidx.core.view.marginRight
 import androidx.core.view.marginTop
 import com.example.schedulemaster.Global
 
-class RadioTextView: AppCompatTextView{
+class RadioDateTextView: AppCompatTextView{
 
     private val TAG: String = "ScheduleMaster_RadioTextView"
     private var beenChosen = false

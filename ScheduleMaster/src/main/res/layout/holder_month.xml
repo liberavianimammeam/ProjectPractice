@@ -5,7 +5,7 @@
     android:background="#00000000"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.example.schedulemaster.view.RadioTextView
+    <com.example.schedulemaster.view.RadioDateTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00000000"

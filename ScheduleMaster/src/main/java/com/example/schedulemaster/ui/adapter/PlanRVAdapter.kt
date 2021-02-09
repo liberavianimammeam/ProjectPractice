@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schedulemaster.R
 import com.example.schedulemaster.ui.holder.PlanViewHolder
 
-class PlanAdapter: RecyclerView.Adapter<PlanViewHolder>() {
+class PlanRVAdapter: RecyclerView.Adapter<PlanViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanViewHolder {
