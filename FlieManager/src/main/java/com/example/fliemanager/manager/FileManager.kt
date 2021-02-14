@@ -13,6 +13,11 @@ object FileManager {
 
     private val TAG: String = "ProjectPractice_FileManager"
     var pathNow: String? = null
+        set(value) {
+            field = value
+            pathNowLiveData.postValue(value)
+        }
+    val pathNowLiveData: MutableLiveData<String> = MutableLiveData()
 
     val pathDataNow: MutableLiveData<ArrayList<FileNameBean>> = MutableLiveData()
 
@@ -29,7 +34,11 @@ object FileManager {
         files.listFiles()?.let {
             for (file: File in it){
 //                Log.i(TAG, "getAll: the file name is ${file.name} and the file is file? ${file.isFile}  and the file is directory ${file.isDirectory}")
-                fileNames.add(FileNameBean(name = file.name, isDirectory = file.isDirectory, type = judgeFileType(file.name), path = pathNow.plus("/").plus(file.name)))
+                if (file.isDirectory){
+                    fileNames.add(FileNameBean(name = file.name, isDirectory = file.isDirectory, type = Global.fileType.path, path = pathNow.plus("/").plus(file.name)))
+                }else{
+                    fileNames.add(FileNameBean(name = file.name, isDirectory = file.isDirectory, type = judgeFileType(file.name), path = pathNow.plus("/").plus(file.name)))
+                }
             }
         }
         pathDataNow.postValue(SortUtil.sortFileList(fileNames))
@@ -71,6 +80,22 @@ object FileManager {
             }
         }
         return pictureData
+    }
+
+    fun getPathList(path: String): ArrayList<String>{
+        var data: ArrayList<String> = ArrayList()
+
+        val pathWithOutExternalPath = path.substring(Environment.getExternalStorageDirectory().absolutePath.length)
+        data.add("内部存储空间")
+        val pathArray = pathWithOutExternalPath.split("/".toCharArray()[0])
+        Log.i(TAG, "getPathList: the path split with / is ${pathWithOutExternalPath.split(System.getProperty("file.separator").toCharArray()[0])[0].equals("")}")
+        for (pathDetail in pathArray){
+            if (!pathDetail.equals("") && !pathDetail.equals(null)){
+                data.add(pathDetail)
+            }
+        }
+
+        return data
     }
 
     

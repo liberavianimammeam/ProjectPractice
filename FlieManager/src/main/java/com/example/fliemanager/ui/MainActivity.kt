@@ -7,11 +7,15 @@ import android.util.Log
 import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.fliemanager.Global
 import com.example.fliemanager.R
 import com.example.fliemanager.manager.FileManager
 import com.example.fliemanager.ui.adapter.PagesAdapter
+import com.example.fliemanager.ui.adapter.PathAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -27,9 +31,23 @@ class MainActivity: AppCompatActivity() {
             ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 1)
         }
+        
+        findViewById<ViewPager2>(R.id.ac_viewpager).adapter = PagesAdapter(this)   
 
-        findViewById<ViewPager2>(R.id.ac_viewpager).adapter = PagesAdapter(this)
+        val pathView = findViewById<RecyclerView>(R.id.ac_recyclerview_filepath)
+        var layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        val pathViewAdapter = PathAdapter()
 
+        pathView.layoutManager = layoutManager
+        pathView.adapter = pathViewAdapter
+
+        FileManager.pathNowLiveData.observe(this, Observer {
+            pathViewAdapter.pathList = FileManager.getPathList(it)
+            Log.i(TAG, "onCreate: the path list is ${FileManager.getPathList(it)}")
+            pathViewAdapter.notifyDataSetChanged()
+        })
+        
         TabLayoutMediator(findViewById(R.id.ac_tablayout), findViewById(R.id.ac_viewpager), object: TabLayoutMediator.TabConfigurationStrategy{
             override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
                 tab.text = Global.pages[position]
