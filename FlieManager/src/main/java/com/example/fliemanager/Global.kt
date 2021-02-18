@@ -8,6 +8,7 @@ object Global {
         val unknown: String = "unknown"
         val jpg: String = "jpg"
         val png: String = "png"
+        val path: String = "path"
     }
 
     object intentTag{
