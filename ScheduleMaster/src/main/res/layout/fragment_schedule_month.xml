@@ -6,11 +6,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fsm_date"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        />
+
+    <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/fsm_monday"
         app:layout_constraintLeft_toRightOf="@+id/fsm_sunday"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fsm_date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintRight_toLeftOf="@+id/fsm_tuesday"

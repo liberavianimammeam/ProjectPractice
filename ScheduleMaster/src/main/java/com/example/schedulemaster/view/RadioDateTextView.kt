@@ -51,13 +51,16 @@ class RadioDateTextView: AppCompatTextView{
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 //        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 //        Log.i(TAG, "onMeasure: the widthMeasureSpec is $widthMeasureSpec and the heightMeasureSpec is $heightMeasureSpec" )
-        Global.RadioTextViewInfo.radioTextViewHeight = Math.min(1080/7 - marginBottom - marginTop, 1080/7 - marginLeft - marginRight)
-        Global.RadioTextViewInfo.radioTextViewWidth = Math.min(1080/7 - marginBottom - marginTop, 1080/7 - marginLeft - marginRight)
+        Global.RadioTextViewInfo.radioTextViewHeight = Math.min(Global.windowWidth/7 - marginBottom - marginTop, Global.windowWidth/7 - marginLeft - marginRight)
+        Global.RadioTextViewInfo.radioTextViewWidth = Math.min(Global.windowWidth/7 - marginBottom - marginTop, Global.windowWidth/7 - marginLeft - marginRight)
         Global.RadioTextViewInfo.marginTop = marginTop
         Global.RadioTextViewInfo.marginBottom = marginBottom
         //TODO 根据屏幕高宽以及textview的margin信息修改其高度和宽度
-        setMeasuredDimension(Math.min(1080/7 - marginBottom - marginTop, 1080/7 - marginLeft - marginRight),
-            Math.min(1080/7 - marginBottom - marginTop, 1080/7 - marginLeft - marginRight))
+        setMeasuredDimension(Math.min(Global.windowWidth/7 - marginBottom - marginTop, Global.windowWidth/7 - marginLeft - marginRight),
+            Math.min(Global.windowWidth/7 - marginBottom - marginTop, Global.windowWidth/7 - marginLeft - marginRight))
+        if (Global.singleLineHeight == 0){
+            Global.singleLineHeight = Math.min(Global.windowWidth/7 - marginBottom - marginTop, Global.windowWidth/7 - marginLeft - marginRight) + marginTop + marginBottom
+        }
     }
 
     fun changeChosenState(beenChosen: Boolean){

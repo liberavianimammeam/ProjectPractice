@@ -6,12 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schedulemaster.Global
 import com.example.schedulemaster.R
-import com.example.schedulemaster.bean.RadioDataBean
+import com.example.schedulemaster.bean.DateBean
 import com.example.schedulemaster.ui.holder.DateDetailRVHolder
 
 class DateDetailRVAdapter: RecyclerView.Adapter<DateDetailRVHolder>() {
 
-    var data = ArrayList<RadioDataBean>()
+    var data = ArrayList<DateBean>()
         set(value){
             field = value
             Global.RadioTextViewInfo.lineNumber = data.size / 7
@@ -25,11 +25,7 @@ class DateDetailRVAdapter: RecyclerView.Adapter<DateDetailRVHolder>() {
 
     override fun onBindViewHolder(holder: DateDetailRVHolder, position: Int) {
         if (position < data.size){
-            if (chosenPosition == position){
-                holder.bindView(data[position], true, chosenDateLiveData)
-            }else{
-                holder.bindView(data[position], false, chosenDateLiveData)
-            }
+            holder.bindView(data[position], chosenDateLiveData)
         }
     }
 

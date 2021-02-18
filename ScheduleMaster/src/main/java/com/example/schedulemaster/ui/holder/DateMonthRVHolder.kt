@@ -31,9 +31,9 @@ class DateMonthRVHolder( itemView: View): RecyclerView.ViewHolder(itemView) {
         dateDetailRecyclerView.adapter = adapter
 
         GlobalScope.launch(Dispatchers.Main) {
-            adapter.data = DateManager.getCalendarDateList(
-                Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(
-                    Calendar.MONTH))
+//            adapter.data = DateManager.getCalendarDateList(
+//                Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(
+//                    Calendar.MONTH))
             adapter.chosenPosition = DateManager.datePosition + DateManager.dateLastMonth - 1
             adapter.notifyDataSetChanged()
         }

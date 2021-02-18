@@ -7,19 +7,20 @@ import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schedulemaster.R
+import com.example.schedulemaster.bean.DateBean
 import com.example.schedulemaster.bean.RadioDataBean
+import com.example.schedulemaster.manager.DataManager
 import com.example.schedulemaster.view.RadioDateTextView
 
 class DateDetailRVHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     private val TAG: String = "ScheduleMaster_MonthViewHolder"
 
-    fun bindView(radioData: RadioDataBean, beanChosen: Boolean, chosenDateLiveData: MutableLiveData<Int>){
+    fun bindView(data: DateBean, chosenDateLiveData: MutableLiveData<Int>){
         itemView.findViewById<TextView>(R.id.hm_text_test).setTextColor(Color.parseColor("#000000"))
-        itemView.findViewById<TextView>(R.id.hm_text_test).text = radioData.date.toString()
-        itemView.findViewById<RadioDateTextView>(R.id.hm_text_test).changeChosenState(beanChosen)
+        itemView.findViewById<TextView>(R.id.hm_text_test).text = data.date.toString()
 
-        if (radioData.isThisMonth){
+        if (data.isThisMonth){
             itemView.findViewById<TextView>(R.id.hm_text_test).setTextColor(Color.parseColor("#000000"))
             itemView.findViewById<RadioDateTextView>(R.id.hm_text_test).changeRoundColor(Color.parseColor("#8500ffff"))
 //            itemView.findViewById<TextView>(R.id.hm_text_test).setTextColor(Color.parseColor("#00000000"))
@@ -29,10 +30,15 @@ class DateDetailRVHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 //            itemView.findViewById<TextView>(R.id.hm_text_test).setTextColor(Color.parseColor("#00000000"))
         }
 
+        if (data.isThisMonth && data.date == DataManager.chosenDate){
+            itemView.findViewById<RadioDateTextView>(R.id.hm_text_test).changeChosenState(true)
+        }
+
+
         itemView.findViewById<TextView>(R.id.hm_text_test).setOnClickListener {
 
-            if (radioData.isThisMonth) {
-                chosenDateLiveData.postValue(radioData.date)
+            if (data.isThisMonth) {
+                chosenDateLiveData.postValue(data.date)
             }
         }
 

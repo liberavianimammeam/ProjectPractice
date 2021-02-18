@@ -1,6 +1,7 @@
 package com.example.schedulemaster.manager
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.example.schedulemaster.bean.DateBean
 import java.util.*
 import kotlin.collections.ArrayList
@@ -38,8 +39,8 @@ object DataManager {
             | and the calendarThisMonthLastDay is $calendarThisMonthLastDay
         """.trimIndent())
 
-        for (i in calendarThisMonthFirstDay.get(Calendar.DAY_OF_WEEK) downTo 1){
-            data.add(DateBean( calendarLastMonthLastDay.get(Calendar.DATE)- i, false))
+        for (i in 0 until calendarThisMonthFirstDay.get(Calendar.DAY_OF_WEEK) - 1){
+            data.add(DateBean(calendarLastMonthLastDay.get(Calendar.DATE)- calendarThisMonthFirstDay.get(Calendar.DAY_OF_WEEK) + 2 + i, false))
         }
         for (i in 1.. calendarThisMonthLastDay.get(Calendar.DATE)){
             data.add(DateBean(i, true))

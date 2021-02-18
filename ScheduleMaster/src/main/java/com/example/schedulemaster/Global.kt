@@ -21,14 +21,30 @@ object Global {
         val STATE_NORMAL = "state_normal"
     }
 
+    object DateViewMode{
+        val MODE_SINGLE_LINE = "mode_single_line"
+        val MODE_LINES = "mode_lines"
+    }
+
+    object StartTime{
+        val startYear = 2020
+        val startMonth = 0
+        val startDate = 1
+    }
+
     /**
      * this project created at 2021
      * so i will only give 20 year from 2020.01.01 to 2039.12.31 to write the schedule
      */
     val calendarStart = Calendar.Builder()
-        .set(Calendar.YEAR, 2020)
-        .set(Calendar.MONTH, 0)
-        .set(Calendar.DATE, 1)
+        .set(Calendar.YEAR, StartTime.startYear)
+        .set(Calendar.MONTH, StartTime.startMonth)
+        .set(Calendar.DATE, StartTime.startDate)
         .build()
     val scheduleTotalMonth = 240
+
+    var windowHeight: Int = 0
+    var windowWidth: Int = 0
+    var singleLineHeight: Int = 0
+
 }

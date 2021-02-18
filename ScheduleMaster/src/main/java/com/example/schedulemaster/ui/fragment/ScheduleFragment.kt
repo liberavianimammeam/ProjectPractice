@@ -17,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+@Deprecated("暂不使用，如需使用需要添加调整高度的逻辑")
 class ScheduleFragment: Fragment() {
 
     private val TAG: String = "ScheduleMaster_CalendarMonthFragment"
@@ -37,8 +38,8 @@ class ScheduleFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_schedule_month, container, false)
-        planRecyclerView = view.findViewById<RecyclerView>(R.id.fcm_plan_recyclerview)
-        dateRecyclerView = view.findViewById<RecyclerView>(R.id.fcm_date_recyclerview)
+//        planRecyclerView = view.findViewById<RecyclerView>(R.id.fcm_plan_recyclerview)
+//        dateRecyclerView = view.findViewById<RecyclerView>(R.id.fcm_date_recyclerview)
         return view
     }
 
@@ -56,7 +57,7 @@ class ScheduleFragment: Fragment() {
 
 //        var layoutManager = GridLayoutManager(context, 7)
 
-        var imageChangeState = view.findViewById<ImageView>(R.id.fcm_change_surface)
+        var imageChangeState = view.findViewById<ImageView>(R.id.fsm_change_surface)
 
         imageChangeState.setOnClickListener {
             GlobalScope.launch(Dispatchers.Main) {
