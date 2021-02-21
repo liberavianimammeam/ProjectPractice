@@ -23,7 +23,7 @@ class SinglePageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById<ImageView>(R.id.hfd_fileicon)
 
         when(data.type){
-            Global.fileType.jpg, Global.fileType.jpg -> {
+            Global.fileType.jpg, Global.fileType.png -> {
                 imageView.setBackgroundResource(R.drawable.ic_file_picture)
             }
             Global.fileType.path -> {
