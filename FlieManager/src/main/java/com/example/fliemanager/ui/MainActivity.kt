@@ -10,18 +10,15 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.example.fliemanager.Global
 import com.example.fliemanager.R
 import com.example.fliemanager.manager.FileManager
-import com.example.fliemanager.ui.adapter.PagesAdapter
 import com.example.fliemanager.ui.adapter.PathAdapter
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
+import com.example.fliemanager.ui.fragment.SinglePageFragment
 
 class MainActivity: AppCompatActivity() {
 
     private val TAG: String = "ProjectPractice_MainActivity"
+    private lateinit var pathView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +28,8 @@ class MainActivity: AppCompatActivity() {
             ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 1)
         }
-        
-        findViewById<ViewPager2>(R.id.ac_viewpager).adapter = PagesAdapter(this)   
 
-        val pathView = findViewById<RecyclerView>(R.id.ac_recyclerview_filepath)
+        pathView = findViewById<RecyclerView>(R.id.ac_recyclerview_filepath)
         var layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         val pathViewAdapter = PathAdapter()
@@ -42,17 +37,33 @@ class MainActivity: AppCompatActivity() {
         pathView.layoutManager = layoutManager
         pathView.adapter = pathViewAdapter
 
+        //监听显示当前路径信息
         FileManager.pathNowLiveData.observe(this, Observer {
             pathViewAdapter.pathList = FileManager.getPathList(it)
-            Log.i(TAG, "onCreate: the path list is ${FileManager.getPathList(it)}")
             pathViewAdapter.notifyDataSetChanged()
         })
-        
-        TabLayoutMediator(findViewById(R.id.ac_tablayout), findViewById(R.id.ac_viewpager), object: TabLayoutMediator.TabConfigurationStrategy{
-            override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
-                tab.text = Global.pages[position]
+
+        supportFragmentManager.beginTransaction()
+            .setReorderingAllowed(true)
+            .add(R.id.ac_framelayout, SinglePageFragment(), "root")
+            .addToBackStack("0")
+            .commit()
+
+        Log.i(TAG, "onCreate: the path data now is " + FileManager.pathDataNow.value.toString())
+
+        //初始化 Filemanager
+        FileManager.initialize()
+
+        FileManager.pathBeanLiveData.observe(this, Observer {
+            if (it.doAdd){
+                supportFragmentManager.beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.ac_framelayout, SinglePageFragment(), null)
+                    .addToBackStack("0")
+                    .commit()
             }
-        }).attach()
+        })
+
     }
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
@@ -63,10 +74,11 @@ class MainActivity: AppCompatActivity() {
 
         Log.i(TAG, "onKeyDown: the keycode is ${event?.keyCode}")
         if (event?.keyCode == KeyEvent.KEYCODE_BACK){
-            Global.positionReturn = -1
-            if (FileManager.backUp()) return true
-
+//            Global.positionReturn = -1
+//            if (FileManager.backUp()) return true
         }
+
         return super.onKeyDown(keyCode, event)
     }
+
 }

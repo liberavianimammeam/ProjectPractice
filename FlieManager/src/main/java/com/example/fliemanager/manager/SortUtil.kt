@@ -25,6 +25,7 @@ object SortUtil {
 
     }
 
+    //重新排序
     fun sortFileList(list: ArrayList<FileNameBean>): ArrayList<FileNameBean>{
         var cmp = SortCharComp()
         Collections.sort(list, cmp)

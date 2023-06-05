@@ -19,14 +19,14 @@ import com.example.fliemanager.ui.PictureActivity
 import com.example.fliemanager.ui.adapter.SinglePageAdapter
 import com.example.fliemanager.viewmodel.SinglePageViewModel
 
-class SinglePageFragment(var position: Int): Fragment() {
+//更新，直接使用fragment代替viewpager来显示文件
+class SinglePageFragment: Fragment() {
 
-    private val TAG: String = "FileManager_SinglePageFragment"
-    var adapter = SinglePageAdapter()
-
-    private val viewmodel by lazy {
-        ViewModelProvider.NewInstanceFactory().create(SinglePageViewModel::class.java)
-    }
+    val TAG:String = "FileManager_SinglePageFragment2"
+    lateinit var recyclerView: RecyclerView
+    val adapter = SinglePageAdapter()
+    //记录创建时的路径
+    lateinit var pathCreated:String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,46 +39,18 @@ class SinglePageFragment(var position: Int): Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        when(position){
-            0 -> filePathBusiness()
-            else -> {}
-        }
+        pathCreated = FileManager.getPathNow()
 
+        recyclerView = view.findViewById<RecyclerView>(R.id.fp_recyclerview)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        adapter.data = FileManager.getPathDataNow()
 
     }
 
-    fun filePathBusiness(){
-        view?.findViewById<RecyclerView>(R.id.fp_recyclerview)?.adapter = adapter
-        view?.findViewById<RecyclerView>(R.id.fp_recyclerview)?.layoutManager = LinearLayoutManager(context)
-
-        viewmodel.FilePathLiveData.observe(this, Observer {
-            adapter.data = it
-        })
-        adapter.choosePath.observe(this, Observer {
-            if (it.nameBean.isDirectory){
-                viewmodel.refreshPathData(it.nameBean.name)
-            }
-            when(it.nameBean.type){
-                Global.fileType.jpg, Global.fileType.png ->{
-                    var intent = Intent(context, PictureActivity::class.java)
-                    intent.putExtra(Global.intentTag.jpgPath, it.nameBean.path)
-                    intent.putExtra(Global.intentTag.clickPosition, it.position)
-//                    startActivity(intent)
-                    startActivityForResult(intent, 10)
-                }
-            }
-
-        })
-
-        viewmodel.startGetData()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        data?.getIntExtra("test_for_test", -1)?.let {
-            Global.positionReturn = it
-            adapter.notifyDataSetChanged()
-            view?.findViewById<RecyclerView>(R.id.fp_recyclerview)?.scrollToPosition(it)
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        FileManager.deleteLastPath()
     }
 }

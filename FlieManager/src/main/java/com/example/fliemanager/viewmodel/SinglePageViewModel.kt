@@ -23,7 +23,7 @@ class SinglePageViewModel: ViewModel() {
     }
 
     fun refreshPathData(choosenPath: String){
-        FileManager.getDataAtPath(FileManager.pathNow?.plus("/").plus(choosenPath))
+        FileManager.getDataAtPath(FileManager.getPathNow().plus("/").plus(choosenPath))
     }
 
 }

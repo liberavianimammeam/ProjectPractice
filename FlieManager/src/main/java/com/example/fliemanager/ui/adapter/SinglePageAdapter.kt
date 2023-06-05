@@ -11,8 +11,7 @@ import com.example.fliemanager.ui.viewholder.SinglePageViewHolder
 
 class SinglePageAdapter: RecyclerView.Adapter<SinglePageViewHolder>() {
 
-    var choosePath: MutableLiveData<FileNameBean.FileNamePositionBean> = MutableLiveData()
-
+    var pictureCount: Int = 0
     var data: ArrayList<FileNameBean> = ArrayList()
         set(value){
             field = value
@@ -20,19 +19,12 @@ class SinglePageAdapter: RecyclerView.Adapter<SinglePageViewHolder>() {
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SinglePageViewHolder {
-        return SinglePageViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.holder_file_detail, parent, false))
+        return SinglePageViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.holder_file_detail,parent, false))
     }
 
     override fun onBindViewHolder(holder: SinglePageViewHolder, position: Int) {
-        if (position < data.size){
-            holder.bindView(data[position], choosePath, position)
-        }
-        if (Global.positionReturn == position){
-            holder.changeBackground(true)
-        }else{
-            holder.changeBackground(false)
-        }
-
+        holder.bindView(data[position],data)
+        holder.resetBackgroundColor()
     }
 
     override fun getItemCount(): Int {

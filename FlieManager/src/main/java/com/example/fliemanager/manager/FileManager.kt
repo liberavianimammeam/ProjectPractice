@@ -1,48 +1,28 @@
 package com.example.fliemanager.manager
 
-import android.graphics.Bitmap
 import android.os.Environment
 import android.util.Log
-import androidx.core.graphics.createBitmap
 import androidx.lifecycle.MutableLiveData
 import com.example.fliemanager.Global
 import com.example.fliemanager.bean.FileNameBean
+import com.example.fliemanager.bean.FilePathBean
 import java.io.File
+import java.io.FilenameFilter
 
 object FileManager {
 
     private val TAG: String = "ProjectPractice_FileManager"
-    var pathNow: String? = null
+    //存储当前路径信息，减少运算
+    private var pathNow: String? = null
         set(value) {
             field = value
             pathNowLiveData.postValue(value)
         }
     val pathNowLiveData: MutableLiveData<String> = MutableLiveData()
+    //创建filePathBean，判断前进或者后退
+    val pathBeanLiveData: MutableLiveData<FilePathBean> = MutableLiveData()
 
     val pathDataNow: MutableLiveData<ArrayList<FileNameBean>> = MutableLiveData()
-
-    fun getDataAtPath(path: String?){
-        if (path == null && pathNow == null){
-            pathNow = Environment.getExternalStorageDirectory().absolutePath
-        }else if (path == null && pathNow != null){
-        }else if (path != null){
-            pathNow = path
-        }
-        var files = File(pathNow)
-        Log.i(TAG, "getAll: start the getfiles at pathNow $pathNow and the files is exit? ${files.exists()} and files is directory? ${files.isDirectory}")
-        var fileNames = ArrayList<FileNameBean>()
-        files.listFiles()?.let {
-            for (file: File in it){
-//                Log.i(TAG, "getAll: the file name is ${file.name} and the file is file? ${file.isFile}  and the file is directory ${file.isDirectory}")
-                if (file.isDirectory){
-                    fileNames.add(FileNameBean(name = file.name, isDirectory = file.isDirectory, type = Global.fileType.path, path = pathNow.plus("/").plus(file.name)))
-                }else{
-                    fileNames.add(FileNameBean(name = file.name, isDirectory = file.isDirectory, type = judgeFileType(file.name), path = pathNow.plus("/").plus(file.name)))
-                }
-            }
-        }
-        pathDataNow.postValue(SortUtil.sortFileList(fileNames))
-    }
 
     fun judgeFileType(fileName: String): String{
         var namePaths = fileName.split(".")
@@ -52,10 +32,20 @@ object FileManager {
         }
         return Global.fileType.unknown
     }
+    fun judgeFileType(f: File): String{
+        if (f.isDirectory) return Global.fileType.path
+
+        var namePath = f.name.split(("."))
+        when(namePath[namePath.size - 1]){
+            "jpg", "JPG" -> return Global.fileType.jpg
+            "png", "PNG" -> return Global.fileType.png
+        }
+        return Global.fileType.unknown
+    }
     
     fun backUp(): Boolean{
         Log.i(TAG, "backUp: pathNow is $pathNow")
-        pathNow?.let { 
+        pathNow?.let {
             if (!it.equals(Environment.getExternalStorageDirectory().absolutePath)){
                 for (i in (it.length-1) downTo 0){
 //                    Log.i(TAG, "backUp: pathNow is and the char is ${it[i]}  and it equals /? ${it[i].equals("/".toCharArray()[0])}")
@@ -96,6 +86,80 @@ object FileManager {
         }
 
         return data
+    }
+
+
+    fun initialize(){
+        if(pathNow == null){
+            pathNow = Global.defaultPath
+        }
+    }
+
+
+    //添加下级路径
+    fun addPath(newPath: String){
+        var path = pathNow + "/" + newPath
+        var file = File(path)
+        if (file.exists()){
+            pathNow = path
+        }
+        pathNow?.let {
+            pathBeanLiveData.postValue(FilePathBean(it, true))
+        }
+    }
+
+    //删除最后一级
+    fun deleteLastPath(){
+        Log.i(TAG, "deleteLastPath:  start")
+        pathNow?.let {
+            var pathNew = ""
+            var pathArray: List<String> = it.split("/")
+            if (pathArray.size > 1){
+                for (i in 1..(pathArray.size-2)){
+                    pathNew = pathNew.plus("/").plus(pathArray[i])
+                }
+            }
+            pathBeanLiveData.postValue(FilePathBean(pathNew, false))
+            pathNow = pathNew
+        }
+    }
+
+    //2023.05.28 获取当前文件路径下的分支，并通知当前数据变更
+    fun getPathDataNow(): ArrayList<FileNameBean> {
+
+        //TODO 转化为存储的数据（忘了叫啥····）
+        if (pathNow == null) pathNow = Global.defaultPath
+
+        var files = File(pathNow)
+        var fileNames = ArrayList<FileNameBean>()
+
+        files.listFiles()?.let{
+            for (f in it){
+                fileNames.add(FileNameBean(f.name, f.isDirectory, judgeFileType(f), pathNow.plus("/").plus(f.name)))
+            }
+        }
+        fileNames = SortUtil.sortFileList(fileNames)
+        pathDataNow.postValue(fileNames)
+        return fileNames
+    }
+    //获取指定路径的文件列表,不更新数据
+    fun getDataAtPath(path: String?): ArrayList<FileNameBean>{
+        var files = File(path)
+        var fileNames = ArrayList<FileNameBean>()
+
+        files.listFiles()?.let{
+            for (f in it){
+                fileNames.add(FileNameBean(f.name, f.isDirectory, judgeFileType(f), pathNow.plus("/").plus(f.name)))
+            }
+        }
+        return SortUtil.sortFileList(fileNames)
+    }
+
+    fun getPathNow():String{
+        if (pathNow == null){
+            initialize()
+        }
+        return pathNow!!
     }
 
     
