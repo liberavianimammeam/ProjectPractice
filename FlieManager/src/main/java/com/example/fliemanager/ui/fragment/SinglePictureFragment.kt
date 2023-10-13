@@ -16,7 +16,7 @@ import androidx.lifecycle.Observer
 import com.example.fliemanager.Global
 import com.example.fliemanager.R
 import com.example.fliemanager.bean.FileNameBean
-import kotlinx.android.synthetic.main.fragment_single_picture.*
+import com.example.fliemanager.databinding.FragmentSinglePictureBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,6 +26,8 @@ class SinglePictureFragment(var data: FileNameBean, var metrics: DisplayMetrics)
     private val TAG: String = "FileManager_SinglePictureFragment"
     private val bitmapLiveData = MutableLiveData<Boolean>()
     private var mBitmap: Bitmap? = null
+    private lateinit var binding: FragmentSinglePictureBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,8 +42,8 @@ class SinglePictureFragment(var data: FileNameBean, var metrics: DisplayMetrics)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        fsp_single_picture.setOnClickListener(object: View.OnClickListener{
+        binding = FragmentSinglePictureBinding.inflate(layoutInflater)
+        binding.fspSinglePicture.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
                 //TODO 双击放大图片，不能通过imageview.setheight 以及 imageview.setwidth 来进行调整
                 //TODO 最好有一段时间的过渡
@@ -58,7 +60,7 @@ class SinglePictureFragment(var data: FileNameBean, var metrics: DisplayMetrics)
             var option = BitmapFactory.Options()
             option.inJustDecodeBounds = true
             var bitmap = BitmapFactory.decodeFile(data.path, option)
-            Log.i(TAG, "onViewCreated: the bitmap height is ${option.outHeight} and the bitmap width is ${option.outWidth}  and the imageview height is ${fsp_single_picture.height} and the imageview width is ${fsp_single_picture.width}")
+            Log.i(TAG, "onViewCreated: the bitmap height is ${option.outHeight} and the bitmap width is ${option.outWidth}  and the imageview height is ${binding.fspSinglePicture.height} and the imageview width is ${binding.fspSinglePicture.width}")
 
             var bitmapHeight = option.outHeight
             var bitmapWidth = option.outWidth
@@ -81,7 +83,7 @@ class SinglePictureFragment(var data: FileNameBean, var metrics: DisplayMetrics)
 
         bitmapLiveData.observe(this, Observer{
             if (it){
-                fsp_single_picture.setImageBitmap(mBitmap)
+                binding.fspSinglePicture.setImageBitmap(mBitmap)
             }
         })
 

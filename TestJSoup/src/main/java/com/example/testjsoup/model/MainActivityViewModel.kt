@@ -12,7 +12,6 @@ class MainActivityViewModel: ViewModel(){
     var spiderManager = SpiderManager.getInstance()
 
     fun startRefreshData(context: Context){
-        Log.i(TAG, "startRefreshData: ")
         spiderManager?.start(context)
     }
 

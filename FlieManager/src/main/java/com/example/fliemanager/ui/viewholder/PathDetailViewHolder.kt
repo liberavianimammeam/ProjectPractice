@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fliemanager.R
-import kotlinx.android.synthetic.main.holder_filepath_path.view.*
 
 class PathDetailViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 

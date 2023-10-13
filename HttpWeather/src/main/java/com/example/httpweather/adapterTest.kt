@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.httpweather.util.GsonUtil
 import com.google.gson.JsonArray
-import kotlinx.android.synthetic.main.viewholder1.view.*
 import org.json.JSONArray
 
 class adapterTest(): RecyclerView.Adapter<viewholderTest>(){

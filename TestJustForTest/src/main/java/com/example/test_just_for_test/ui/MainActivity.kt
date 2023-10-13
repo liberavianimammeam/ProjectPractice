@@ -16,8 +16,8 @@ import androidx.preference.PreferenceFragmentCompat
 import com.example.test_just_for_test.R
 import com.example.test_just_for_test.bean.Students
 import com.example.test_just_for_test.chineseSort.ChineseCharComp
+import com.example.test_just_for_test.databinding.ActivityMainBinding
 import com.example.test_just_for_test.ui.fragment.SettingFragment2
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -25,10 +25,12 @@ import kotlin.collections.ArrayList
 class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback, View.OnClickListener {
 
     private val TAG = "TestJustForTest_MainActivity"
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         val job = GlobalScope.launch(Dispatchers.Main){
         }
         Log.i(TAG, "onCreate: the class name is " + (Dispatchers.Main + job).javaClass.name  + "\n and the main class is " + Dispatchers.Main.javaClass.name)
@@ -44,10 +46,10 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
 //        val exampleCounterFlow: Flow<Int> = dataStore.data.map {
 //            it[] ?: 0
 //        }
-        test_button1.setOnClickListener(this)
-        test_button2.setOnClickListener(this)
-        test_button3.setOnClickListener(this)
-        test_placeHolder.setOnClickListener(this)
+        binding.testButton1.setOnClickListener(this)
+        binding.testButton2.setOnClickListener(this)
+        binding.testButton3.setOnClickListener(this)
+        binding.testPlaceHolder.setOnClickListener(this)
 
 //        dataStore.edit {
 //            val currentCounterValue = it["test"] ?: 0
@@ -97,7 +99,7 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
 
     override fun onStart() {
         super.onStart()
-        test_group.visibility = View.GONE
+        binding.testGroup.visibility = View.GONE
         var mTextView: TextView = TextView(this)
         mTextView.minHeight = 100
         mTextView.minWidth = 200
@@ -105,7 +107,7 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
         mTextView.setBackgroundColor(Color.parseColor("#00ffff"))
 //        mTextView.id = R.id.testText1
         Log.i(TAG, "onCreate: the text id is " + mTextView.id)
-        constraint_test.addView(mTextView)
+        binding.constraintTest.addView(mTextView)
         var mSet = ConstraintSet()
 //        mSet.constrainHeight(mTextView.id, ConstraintLayout.LayoutParams.MATCH_PARENT)
 //        mSet.constrainWidth(mTextView.id, 50)
@@ -114,7 +116,7 @@ class MainActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceS
         mSet.connect(mTextView.id, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT)
         mSet.connect(mTextView.id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT)
 
-        mSet.applyTo(constraint_test)
+        mSet.applyTo(binding.constraintTest)
 
         for (i in 1..10){
             var testReturnBool: Boolean = testCouReturn()

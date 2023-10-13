@@ -6,18 +6,19 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.example.test_just_for_test.R
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.test_just_for_test.databinding.ActivityMainBinding
 
 class ProxyTestActivity: Activity() {
 
     private val TAG: String = "TestJustForTest_ProxyTestActivity"
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-
-        test_button2.setOnClickListener(object: View.OnClickListener{
+        binding.testButton2.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
 
                 var intent: Intent = Intent(this@ProxyTestActivity, StartForResultActivity::class.java)

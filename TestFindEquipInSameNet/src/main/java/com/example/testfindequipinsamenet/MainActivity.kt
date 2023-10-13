@@ -10,8 +10,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import com.example.testfindequipinsamenet.databinding.ActivityMainBinding
 import com.example.testfindequipinsamenet.model.MainActivityViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val NET_WORK_TYPE_WIFI = "wifi"
     private val NET_WORK_TYPE_NORMAL = "normal"
 
+    private lateinit var binding: ActivityMainBinding
+
     private val viewModel by lazy {
         ViewModelProvider.AndroidViewModelFactory(application).create(MainActivityViewModel::class.java)
     }
@@ -28,8 +30,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        activity_main_button_find_equip.setOnClickListener(this)
+        binding.activityMainButtonFindEquip.setOnClickListener(this)
 
         if (checkSelfPermission(Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED){
             requestPermissions(arrayOf(Manifest.permission.ACCESS_WIFI_STATE), 0)

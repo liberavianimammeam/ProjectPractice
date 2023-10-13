@@ -1,7 +1,7 @@
 {
 	"Config":{
-		"enable":1, // 是否开启配置，1为开启，0为关闭
-		"macList":["30:1F:9A:61:B7:01"], // 只对该list中MAC的机器生效，如果没有该字段则不过滤
+		"enable":1,
+		"macList":["30:1F:9A:61:B7:01"],
 		"serverUrl":"https://pdev.cleartv.cn",
 		"speakOn":true,
 		"checkFingerprint":true,
@@ -19,9 +19,9 @@
 		"checkSameGuyDelay":3000,
 		"faceAreaThreshold":0.01,
 		"idFaceThreshold":0.1,
-		"cameraDegree":1, // 0 : 0° ; 1 : 90° ; 2 : 180° ; 3 : 270°
+		"cameraDegree":1,
 		"systemVol":15,
-		"sceneType":"CHECKER_VERTICAL" //COUNTER(0, "计数器"),CHECKER_VERTICAL(10, "立式人脸检票机"),CHECKER_GATE(11, "闸机检票机"),REGISTRAR_FACE(20, "人脸登记机"),REGISTRAR_FINGERPRINT(21, "指纹登记机")
+		"sceneType":"CHECKER_VERTICAL"
 	},
 	"Upgrade":{
 		"enable":1,

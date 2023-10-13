@@ -19,11 +19,11 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.httpweather.databinding.ActivityMainBinding
 import com.example.httpweather.util.ioThread
 import com.example.httpweather.view.FragmentLocation
 import com.google.gson.Gson
 import com.google.gson.JsonParser
-import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity() {
     private val city = "city=吉安"
     private val ip = "ip=192.168.10.1"
 
+    private lateinit var binding: ActivityMainBinding
+
     lateinit var fragmentLocation: FragmentLocation
 
     val viewModel by lazy {
@@ -59,6 +61,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
         var char: Char = 'A'
         var string: String = "A"
@@ -85,17 +88,17 @@ class MainActivity : AppCompatActivity() {
         queue.add(jsonObjectRequest)
 
         var adapter = adapterTest()
-        httpWeather_activityMain_recyclerviewTest.layoutManager = LinearLayoutManager(this)
-        httpWeather_activityMain_recyclerviewTest.adapter = adapter
-        httpWeather_activityMain_recyclerviewTest.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        binding.httpWeatherActivityMainRecyclerviewTest.layoutManager = LinearLayoutManager(this)
+        binding.httpWeatherActivityMainRecyclerviewTest.adapter = adapter
+        binding.httpWeatherActivityMainRecyclerviewTest.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         var set: ConstraintSet = ConstraintSet()
-        set.clone(activityMain_constrainLayout)
-        set.constrainPercentWidth(activityMain_frameLayout_locations.id, 0.3f)
+        set.clone(binding.activityMainConstrainLayout)
+        set.constrainPercentWidth(binding.activityMainFrameLayoutLocations.id, 0.3f)
         fragmentLocation = FragmentLocation()
-        supportFragmentManager.beginTransaction().replace(activityMain_frameLayout_locations.id, fragmentLocation, "location").commit()
+        supportFragmentManager.beginTransaction().replace(binding.activityMainFrameLayoutLocations.id, fragmentLocation, "location").commit()
         Log.i(TAG, "onCreate: the fragmentLocation id is " + fragmentLocation.id +" and the fragmentLocation tag is " + fragmentLocation.tag)
-        set.applyTo(activityMain_constrainLayout)
+        set.applyTo(binding.activityMainConstrainLayout)
 
         viewModel.resolveJsonData(this)
         viewModel.jsonArray.observe(this, Observer {

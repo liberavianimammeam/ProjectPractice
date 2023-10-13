@@ -11,11 +11,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testjsoup.bean.*
+import com.example.testjsoup.databinding.ActivityMainBinding
 import com.example.testjsoup.http_request.IRequest
 import com.example.testjsoup.model.MainActivityViewModel
 import com.example.testjsoup.view.adapter.StoryRecyclerViewAdapter
 import com.google.gson.JsonObject
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -40,6 +40,7 @@ import javax.xml.bind.JAXBElement
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private val TAG: String = "TestJSoup_MainActivity"
+    private lateinit var binding: ActivityMainBinding
     val viewModel by lazy {
         ViewModelProvider.AndroidViewModelFactory(application).create(MainActivityViewModel::class.java)
     }
@@ -106,11 +107,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        activity_main_button1.text = "身份证检票接口"
+        binding.activityMainButton1.text = "身份证检票接口"
 
-        activity_main_button1.setOnClickListener(this)
-        activity_main_button2.setOnClickListener(this)
+        binding.activityMainButton1.setOnClickListener(this)
+        binding.activityMainButton2.setOnClickListener(this)
 
 
         var client = OkHttpClient.Builder()

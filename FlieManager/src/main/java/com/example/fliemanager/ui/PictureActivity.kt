@@ -14,9 +14,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.fliemanager.Global
 import com.example.fliemanager.R
 import com.example.fliemanager.bean.FileNameBean
+import com.example.fliemanager.databinding.ActivityPictureBinding
 import com.example.fliemanager.manager.FileManager
 import com.example.fliemanager.ui.adapter.PicturePagesAdapter
-import kotlinx.android.synthetic.main.activity_picture.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -26,11 +26,13 @@ class PictureActivity: AppCompatActivity() {
     private val TAG: String = "FileManager_PictureActivity"
     private lateinit var pictureData: ArrayList<FileNameBean>
     private val positionLiveData = MutableLiveData<Int>()
+    
+    private lateinit var binding: ActivityPictureBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture)
-
+        binding = ActivityPictureBinding.inflate(layoutInflater)
 
         var metrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(metrics)
@@ -41,28 +43,28 @@ class PictureActivity: AppCompatActivity() {
         GlobalScope.launch {
             pictureData = FileManager.getPictureDataNow()
 
-            ap_pictureName.text = pictureData[intent.getIntExtra(Global.intentTag.clickPosition, 0)].name
-            ap_count.text = (intent.getIntExtra(Global.intentTag.clickPosition, 0)+1).toString().plus("/").plus(pictureData.size.toString())
+            binding.apPictureName.text = pictureData[intent.getIntExtra(Global.intentTag.clickPosition, 0)].name
+            binding.apCount.text = (intent.getIntExtra(Global.intentTag.clickPosition, 0)+1).toString().plus("/").plus(pictureData.size.toString())
 
             var mAdapter = PicturePagesAdapter(
                 FileManager.getPictureDataNow(),
                 this@PictureActivity,
                 metrics
             )
+            
+            binding.apPictureViews.adapter = mAdapter
+            binding.apPictureViews.rotationY = 180f
 
-            ap_picture_views.adapter = mAdapter
-            ap_picture_views.rotationY = 180f
-
-            ap_picture_views.setCurrentItem(
+            binding.apPictureViews.setCurrentItem(
                 intent.getIntExtra(Global.intentTag.clickPosition, 0),
                 false
             )
-            ap_picture_views.registerOnPageChangeCallback(myCallBack(positionLiveData))
+            binding.apPictureViews.registerOnPageChangeCallback(myCallBack(positionLiveData))
         }.start()
 
         positionLiveData.observe(this, Observer {
-            ap_pictureName.text = pictureData[it].name
-            ap_count.text = (it+1).toString().plus("/").plus(pictureData.size.toString())
+            binding.apPictureName.text = pictureData[it].name
+            binding.apCount.text = (it+1).toString().plus("/").plus(pictureData.size.toString())
         })
 
     }
@@ -70,7 +72,7 @@ class PictureActivity: AppCompatActivity() {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (event?.keyCode == KeyEvent.KEYCODE_BACK){
             var intent: Intent = Intent()
-            intent.putExtra("test_for_test", ap_picture_views.currentItem)
+            intent.putExtra("test_for_test", binding.apPictureViews.currentItem)
             setResult(5, intent)
             finish()
             return true

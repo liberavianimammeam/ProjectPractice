@@ -1,8 +1,8 @@
 plugins {
-    id 'com.android.application'
     id 'kotlin-android'
+    id 'com.android.application'
+    id 'kotlin-parcelize'
 }
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
