@@ -7,6 +7,8 @@ android {
     compileSdkVersion 31
     buildToolsVersion "30.0.2"
 
+    // ndkVersion = "" // 指定ndk的版本，不指定则会根据Android gradle版本来选择ndk版本
+
     defaultConfig {
         applicationId "com.example.testjustfortest"
         minSdkVersion 25
@@ -27,6 +29,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    externalNativeBuild{
+//        cmake{
+//            version '3.22.1'
+//            //如果需要使用其他版本的cmake，则需要下载冰安装cmake，添加到path，或者在local.properties文件中指定cmake位置 cmake.dir = "path-to-cmake"
+//            // version = "" // 设置cmake的版本信息，如果不指定则使用3.10.2
+//            path "src/main/cpp/CMakeLists.txt"
+//        }
+    }
+
 }
 
 dependencies {

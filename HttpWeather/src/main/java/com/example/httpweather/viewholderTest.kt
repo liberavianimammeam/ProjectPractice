@@ -9,7 +9,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.RecyclerView
 import com.example.httpweather.bean.LocationBean
 import com.example.httpweather.util.GsonUtil
-import kotlinx.android.synthetic.main.viewholder1.view.*
+//import kotlinx.android.synthetic.main.viewholder1.view.*
 import org.json.JSONObject
 import java.lang.Exception
 
@@ -22,19 +22,19 @@ class viewholderTest(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         init()
 
-        itemView.viewHolder_id.text = "ID: ${locationBean.id}"
-        itemView.viewHolder_lon.text = "经度: ${locationBean.lon}"
-        itemView.viewHolder_lat.text = "纬度: ${locationBean.lat}"
-        itemView.viewHolder_cityName.text = "城市: ${locationBean.cityZh}"
-        itemView.viewHolder_province.text = "省份: ${locationBean.provinceZh}"
-        itemView.viewholder_leader.text = "领导?: ${locationBean.leaderZh}"
-
-        itemView.viewHolder_id.visibility = View.VISIBLE
-        itemView.viewHolder_province.visibility = View.VISIBLE
-        itemView.viewHolder_lat.visibility = View.VISIBLE
-        itemView.viewHolder_lon.visibility = View.VISIBLE
-        itemView.viewHolder_cityName.visibility = View.VISIBLE
-        itemView.viewholder_leader.visibility = View.VISIBLE
+//        itemView.viewHolder_id.text = "ID: ${locationBean.id}"
+//        itemView.viewHolder_lon.text = "经度: ${locationBean.lon}"
+//        itemView.viewHolder_lat.text = "纬度: ${locationBean.lat}"
+//        itemView.viewHolder_cityName.text = "城市: ${locationBean.cityZh}"
+//        itemView.viewHolder_province.text = "省份: ${locationBean.provinceZh}"
+//        itemView.viewholder_leader.text = "领导?: ${locationBean.leaderZh}"
+//
+//        itemView.viewHolder_id.visibility = View.VISIBLE
+//        itemView.viewHolder_province.visibility = View.VISIBLE
+//        itemView.viewHolder_lat.visibility = View.VISIBLE
+//        itemView.viewHolder_lon.visibility = View.VISIBLE
+//        itemView.viewHolder_cityName.visibility = View.VISIBLE
+//        itemView.viewholder_leader.visibility = View.VISIBLE
 
     }
 
@@ -57,12 +57,12 @@ class viewholderTest(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     fun init(){
-        itemView.viewHolder_id.visibility = View.GONE
-        itemView.viewHolder_province.visibility = View.GONE
-        itemView.viewHolder_cityName.visibility = View.GONE
-        itemView.viewHolder_lat.visibility = View.GONE
-        itemView.viewHolder_lon.visibility = View.GONE
-        itemView.viewholder_leader.visibility = View.GONE
+//        itemView.viewHolder_id.visibility = View.GONE
+//        itemView.viewHolder_province.visibility = View.GONE
+//        itemView.viewHolder_cityName.visibility = View.GONE
+//        itemView.viewHolder_lat.visibility = View.GONE
+//        itemView.viewHolder_lon.visibility = View.GONE
+//        itemView.viewholder_leader.visibility = View.GONE
     }
 
 }

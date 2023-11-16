@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -35,7 +36,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.PictureActivity" android:exported="false"
+        <activity android:name=".ui.PictureActivity" android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:screenOrientation="portrait"
             >

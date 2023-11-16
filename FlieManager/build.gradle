@@ -23,6 +23,16 @@ android {
         viewBinding true
     }
 
+    //kotlin 升级项目内只能使用jdk17，雌项目内依赖jdk
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    viewBinding{
+        enabled = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false

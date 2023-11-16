@@ -1,6 +1,12 @@
 package com.example.fliemanager.bean
 
-class FileNameBean(var name: String, var isDirectory: Boolean, var type: String?, var path: String) {
+class FileNameBean(var name: String,
+                   var isDirectory: Boolean,
+                   var type: String?,
+                   var path: String,
+                   var picturePosition: Int = -1
+
+) {
 
     override fun toString(): String {
         return """

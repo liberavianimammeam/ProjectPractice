@@ -31,8 +31,8 @@ class PictureActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_picture)
         binding = ActivityPictureBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         var metrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(metrics)

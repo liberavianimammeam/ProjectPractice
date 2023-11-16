@@ -11,11 +11,9 @@ import com.example.fliemanager.ui.viewholder.SinglePageViewHolder
 
 class SinglePageAdapter: RecyclerView.Adapter<SinglePageViewHolder>() {
 
-    var pictureCount: Int = 0
     var data: ArrayList<FileNameBean> = ArrayList()
         set(value){
             field = value
-            notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SinglePageViewHolder {

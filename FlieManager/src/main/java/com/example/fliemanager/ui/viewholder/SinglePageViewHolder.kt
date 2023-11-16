@@ -3,7 +3,6 @@ package com.example.fliemanager.ui.viewholder
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -31,7 +30,7 @@ class SinglePageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         when(dataBean.type){
             //TODO 拉起图片查看页面
             //TODO 此处拉起图片的position不完善，可能出现bug
-            Global.fileType.jpg, Global.fileType.png ->{
+            Global.fileType.picture ->{
                 itemView.findViewById<ImageView>(R.id.hfd_fileicon).setBackgroundResource(R.drawable.ic_file_picture)
                 itemView.setOnClickListener(View.OnClickListener {
                     GlobalScope.launch {
@@ -70,7 +69,7 @@ class SinglePageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     fun checkPictureClickPosition(data: ArrayList<FileNameBean>): Int{
         var pictureCount: Int = 0
         for (i in 0..adapterPosition){
-            if (data[i].type == Global.fileType.png || data[i].type == Global.fileType.jpg){
+            if (data[i].type == Global.fileType.picture){
                 pictureCount ++
             }
         }

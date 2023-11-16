@@ -33,7 +33,9 @@ class SinglePictureFragment(var data: FileNameBean, var metrics: DisplayMetrics)
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_single_picture, container, false)
+        binding = FragmentSinglePictureBinding.inflate(layoutInflater)
+//        return inflater.inflate(R.layout.fragment_single_picture, container, false)
+        return binding.root
     }
 
     init {
@@ -42,7 +44,6 @@ class SinglePictureFragment(var data: FileNameBean, var metrics: DisplayMetrics)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentSinglePictureBinding.inflate(layoutInflater)
         binding.fspSinglePicture.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
                 //TODO 双击放大图片，不能通过imageview.setheight 以及 imageview.setwidth 来进行调整
@@ -60,7 +61,6 @@ class SinglePictureFragment(var data: FileNameBean, var metrics: DisplayMetrics)
             var option = BitmapFactory.Options()
             option.inJustDecodeBounds = true
             var bitmap = BitmapFactory.decodeFile(data.path, option)
-            Log.i(TAG, "onViewCreated: the bitmap height is ${option.outHeight} and the bitmap width is ${option.outWidth}  and the imageview height is ${binding.fspSinglePicture.height} and the imageview width is ${binding.fspSinglePicture.width}")
 
             var bitmapHeight = option.outHeight
             var bitmapWidth = option.outWidth
@@ -73,7 +73,7 @@ class SinglePictureFragment(var data: FileNameBean, var metrics: DisplayMetrics)
                 option.inSampleSize = if (heightRatio > widthRatio) widthRatio else heightRatio
                 mBitmap = BitmapFactory.decodeFile(data.path, option)
                 bitmapLiveData.postValue(true)
-                Log.i(TAG, "onStart: mBitmap is null ? ${mBitmap == null}")
+                Log.i(TAG, "onStart: mBitmap is null ? ${mBitmap == null} \n" + "and the decood file path is " + data.path)
             }else{
                 mBitmap = BitmapFactory.decodeFile(data.path)
                 bitmapLiveData.postValue(true)
